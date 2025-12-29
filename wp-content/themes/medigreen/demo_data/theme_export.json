@@ -1,0 +1,41 @@
+{
+      "documentation_url": "https://documentation.bold-themes.com/medigreen/getting-started/",
+      "support_url": "https://boldthemes.ticksy.com/",
+      "xls": [
+        { 
+          "name": "consulting.WordPress.2024-07-23.xml",
+          "title": "Consulting Demo",
+          "img": "Consulting.jpg",
+          "url": "https://medigreen.bold-themes.com/consulting/",
+          "hpno": 2
+        },
+        { 
+          "name": "dispensary.WordPress.2024-07-23.xml",
+          "title": "Dispensary Demo",
+          "img": "Dispensary.jpg",
+          "url": "https://medigreen.bold-themes.com/dispensary/",
+          "hpno": 2
+        },
+        { 
+          "name": "doctor.WordPress.2024-07-23.xml",
+          "title": "Doctor Demo",
+          "img": "Doctor.jpg",
+          "url": "https://medigreen.bold-themes.com/doctor/",
+          "hpno": 1
+        },
+        { 
+          "name": "law.WordPress.2024-07-23.xml",
+          "title": "Law Demo",
+          "img": "Law.jpg",
+          "url": "https://medigreen.bold-themes.com/law/",
+          "hpno": 1
+        },
+        { 
+          "name": "lounge.WordPress.2024-07-23.xml",
+          "title": "Lounge Demo",
+          "img": "Lounge.jpg",
+          "url": "https://medigreen.bold-themes.com/lounge/",
+          "hpno": 1
+        }
+      ] 
+  }

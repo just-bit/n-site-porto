@@ -1,0 +1,40 @@
+<?php
+
+$set = strtolower( basename(__FILE__, '.php') );
+
+$$set = array(
+    'Accesorise (cannabis set)' => $set . '_e900',
+  	'Bong (cannabis set)' => $set . '_e901',
+  	'Bottle (cannabis set)' => $set . '_e902',
+  	'Bottle-1 (cannabis set)' => $set . '_e903',
+  	'Brain (cannabis set)' => $set . '_e904',
+  	'Cannabis-Leaf (cannabis set)' => $set . '_e905',
+  	'Card (cannabis set)' => $set . '_e906',
+  	'Case (cannabis set)' => $set . '_e907',
+  	'Concentrate (cannabis set)' => $set . '_e908',
+  	'Court (cannabis set)' => $set . '_e909',
+  	'Dispencery (cannabis set)' => $set . '_e90a',
+  	'Doctor (cannabis set)' => $set . '_e90b',
+  	'Eye (cannabis set)' => $set . '_e90c',
+  	'Grinder (cannabis set)' => $set . '_e90d',
+  	'Growing (cannabis set)' => $set . '_e90e',
+  	'Growth (cannabis set)' => $set . '_e90f',
+  	'ID (cannabis set)' => $set . '_e910',
+  	'Joint (cannabis set)' => $set . '_e911',
+  	'Judge (cannabis set)' => $set . '_e912',
+  	'Legal (cannabis set)' => $set . '_e913',
+  	'Liquid (cannabis set)' => $set . '_e914',
+  	'Locatiob (cannabis set)' => $set . '_e915',
+  	'Magnifier (cannabis set)' => $set . '_e916',
+  	'Medicine (cannabis set)' => $set . '_e917',
+  	'Microscope (cannabis set)' => $set . '_e918',
+  	'Oil (cannabis set)' => $set . '_e919',
+  	'Patient-info (cannabis set)' => $set . '_e91a',
+  	'Pill (cannabis set)' => $set . '_e91b',
+  	'Pills (cannabis set)' => $set . '_e91c',
+  	'Pills-2 (cannabis set)' => $set . '_e91d',
+  	'Rx (cannabis set)' => $set . '_e91e',
+  	'Scale (cannabis set)' => $set . '_e91f',
+  	'Study (cannabis set)' => $set . '_e920',
+  	'Vape (cannabis set)' => $set . '_e921'
+);

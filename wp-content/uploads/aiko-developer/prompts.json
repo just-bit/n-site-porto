@@ -1,0 +1,167 @@
+[
+    {
+        "title": "Age Verification Popup",
+        "description": "Displays a fullscreen pop-up prompting visitors to verify their age on site entry, ensuring compliance with age restrictions.",
+        "tags": [ "Frontend" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a site administrator**, I want to prompt visitors to verify their age before accessing the site so that I can ensure compliance with age restrictions.\n\n2. **Example**: When a visitor accesses the site, a fullscreen pop-up appears asking them to verify their age. The visitor reads the title, subtitle, and descriptive text, then clicks the button to close the pop-up. The pop-up does not reappear for the same visitor for 5 days.\n\n3. **Features**:\n - Display a fullscreen pop-up for age verification when a visitor accesses the site.\n - Include a title, subtitle, descriptive text, and a button in the pop-up for user interaction.\n - Allow users to close the pop-up by clicking the button.\n - Ensure the pop-up does not reappear for the same user for 5 days after being closed.\n - Provide a customizer option to enable or disable the age verification pop-up.\n - Allow customization of the title, subtitle, descriptive text, and button text in the pop-up through the customizer.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/age-verification-popup/customizer.jpg,https://aiko-developer.bold-themes.com/import/screenshots/age-verification-popup/fe.jpg",
+        "playground": "https://tinyurl.com/5n88w4n8",
+        "pro-only": "false"
+    },
+    {
+        "title": "Allow SVG Uploads",
+        "description": "Extends the WordPress media uploader to safely allow SVG and SVGZ file uploads, enabling the use of scalable graphics. (Doesn't work in multisite environments)",
+        "tags": [ "Admin", "Media" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As an administrator user**, I want to upload SVG files so that I can use scalable graphics in my website content.\n\n2. **Example**: An administrator accesses the WordPress media uploader and selects an SVG file from their computer. The plugin then adds the appropriate MIME types ('image/svg+xml' for both SVG and SVGZ) and validates the file format, allowing the upload to proceed while non-administrator users see no changes or allowances for SVG uploads.\n\n3. **Features**:\n - Extend the list of allowed MIME types in the WordPress media uploader to include 'svg' and 'svgz'.\n - Validate uploaded files by checking the file extension and MIME type; if no valid type is detected, use wp_check_filetype to determine and properly set the file's extension, MIME type, and proper filename.\n - Enhance the validation function to reassign or adjust the file array with the proper extension, MIME type, and filename if validated by wp_check_filetype.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/allow-svg-uploads/0.png",
+        "playground": "https://tinyurl.com/yse9b4sf",
+        "pro-only": "true"
+    },
+    {
+        "title": "Auto-Collapse Long Comments",
+        "description": "Automatically shortens long comments with an expandable 'Read More/Less' interface to maintain a clean page layout.",
+        "tags": [ "Post" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. User Story:\n - As a site visitor, I want long blog comments to initially display in a shortened form with configurable \"Read More\" and \"Read Less\" controls so that the page layout remains clean while retaining the ability to view the full comment.\n\n2. Example:\n - When a comment on a blog post exceeds a configurable maximum length (e.g., 100 characters), the plugin displays only the first part followed by an ellipsis (\"...\") and a \"Read More\" control; clicking this control expands the comment to show its full text along with a \"Read Less\" control to collapse it back.\n\n3. Features:\n - Provide an admin setting to configure the maximum comment length threshold for truncation.\n - Provide admin settings to customize the text labels for the \"Read More\" and \"Read Less\" controls.\n - Automatically detect and truncate comments on blog posts that exceed the configured maximum character length, appending an ellipsis.\n - Store the original complete comment text in a separate internal variable before truncation, and use this stored version in the expanded display.\n - Display a toggle control (\"Read More\") alongside truncated comments that expands the comment to full length upon clicking.\n - Display a toggle control (\"Read Less\") in the expanded view that reverts the comment back to its truncated state when clicked.\n - Ensure that proper escaping functions are applied to both the truncated and full comment texts to prevent display issues such as double-escaping.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/auto-collapse-long-comments/0.jpg",
+        "playground": "https://tinyurl.com/y8htmpxn",
+        "pro-only": "true"
+    },
+    {
+        "title": "Crypto Prices Dashboard Widget",
+        "description": "Displays a live table of cryptocurrency prices on the WordPress dashboard by fetching data from the CoinCap API.",
+        "tags": [ "Admin" ],
+        "model": "gpt-4o",
+		"temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a WordPress admin**, I want to view cryptocurrency prices on my dashboard so that I can monitor market trends directly from my WordPress site.\n\n2. **Example**: \n - A WordPress admin logs into their dashboard and sees a widget displaying the current prices and 24-hour changes for Bitcoin, Ethereum, and Solana, fetched from the CoinCap API.\n\n3. **Features**:\n - Fetch cryptocurrency prices from the CoinCap API, specifically for Bitcoin, Ethereum, and Solana.\n - Handle API errors gracefully by logging errors and displaying a user-friendly error message in the widget.\n - Display a dashboard widget in the WordPress admin area showing a table with the following columns: Name, Symbol, Price (USD), and 24h Change.\n - Enqueue necessary Datatables assets to ensure the table is responsive and interactive.\n - Format the price and change percentage to two decimal places.\n - Register the dashboard widget to appear in the WordPress admin dashboard.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/crypto-prices-widget/0.jpg",
+        "playground": "https://tinyurl.com/297knd8x",
+        "pro-only": "true"
+    },
+    {
+        "title": "Custom Excerpt Function",
+        "description": "Generates clean, concise excerpts by stripping HTML and truncating post content to a set character limit with an appended ellipsis.",
+        "tags": [ "Admin", "Post" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. User Story:\n - As a WordPress site administrator, I want to generate improved excerpts for posts so that they are concise and neatly formatted for display.\n\n2. Example:\n - When a post is published, the plugin automatically generates an excerpt by removing all HTML tags, truncating the text to 100 characters, and appending an ellipsis if the text is longer than 100 characters.\n\n3. Features:\n - The plugin must strip all HTML tags from the post content to ensure plain text excerpts.\n - It must truncate the post content to a maximum of 100 characters.\n - If the post content exceeds 100 characters, the plugin must append a fixed ellipsis (\"\"...\"\") to the end of the excerpt.\n - The plugin should automatically generate these excerpts when a post is published or updated.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/custom-excerpt-function/0.jpg",
+        "playground": "https://tinyurl.com/35cwwbzn",
+        "pro-only": "true"
+    },
+    {
+        "title": "Disable Attachment Pages",
+        "description": "Redirects users away from standalone attachment pages to improve user experience and prevent duplicate content issues.",
+        "tags": [ "Admin", "Media" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a website administrator**, I want to hide attachment pages from all visitors so that the website does not display standalone attachment pages.\n\n2. **Example**:\n - When a visitor tries to access an attachment page directly, they should be redirected to the parent post if it exists and is not trashed, otherwise, they should be redirected to the homepage.\n\n3. **Features**:\n - Detect if the current page is an attachment page.\n - Check if the attachment has a parent post and if the parent post is not trashed.\n - Redirect visitors to the parent post if it exists and is not trashed.\n - Redirect visitors to the homepage if the attachment has no parent post or if the parent post is trashed.\n - Handle only standard posts, not custom post types.",
+        "screenshots": "",
+        "playground": "https://tinyurl.com/yevvnfv2",
+        "pro-only": "false"
+    },
+    {
+        "title": "Display Reading Time",
+        "description": "Calculates and shows an estimated reading time for blog posts based on word count, helping visitors gauge their reading commitment.",
+        "tags": [ "Post", "Frontend" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. User Story:\n - As a blog visitor, I want to see an estimated reading time displayed before the blog post content so that I can gauge how long it will take to read the article.\n\n2. Example:\n - When a user opens a blog post, the plugin calculates the word count from the post content, divides it by 200 (words per minute), rounds up to the nearest whole number, and displays a message such as \"Estimated reading time: 5 minutes\" above the post content.\n\n3. Features:\n - Calculate the word count of the blog post content by stripping HTML tags.\n - Divide the word count by 200 (words per minute) and round up the result to determine the estimated reading time.\n - Prepend the estimated reading time message (e.g., \"Estimated reading time: X minute(s)\") before the blog post content.\n - Use localization functions to correctly handle singular and plural forms for the word \"minute\".",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/display-reading-time/0.jpg",
+        "playground": "https://tinyurl.com/3apdsr73",
+        "pro-only": "true"
+    },
+    {
+        "title": "Duplicate Post/Page",
+        "description": "Enables quick cloning of posts and pages, replicating content, metadata, and taxonomies for efficient content creation.",
+        "tags": [ "Admin", "Post" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As an administrator**, I want to clone posts and pages with a single click so that I can easily duplicate content with all its attributes for further editing or publishing.\n2. **Example**:\n - An administrator is editing a post or page and decides to create a similar one. They click the \"Clone\" button, located in a meta box, and a new post or page is created with the same content, categories, tags, media attachments, and metadata. The title of the cloned post or page is appended with \"(Copy)\". The administrator is then redirected to the editing screen of the newly cloned post or page.\n3. **Features**:\n - Implement a \"Clone\" button within a meta box on the single post and page editing screens that duplicates the current post or page.\n - Ensure the cloned post or page includes all categories, tags, media attachments, metadata, and other taxonomies from the original.\n - Retrieve the complete meta array using `get_post_meta($post_id, '', true)` and filter or sanitize appropriately to preserve data structure.\n - Append \"(Copy)\" to the title of the cloned post or page.\n - Redirect the user to the editing screen of the newly cloned post or page immediately after the cloning process is completed.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/duplicate-post/0.png",
+        "playground": "https://tinyurl.com/3tfsbjmp",
+        "pro-only": "false"
+    },
+    {
+        "title": "Limit Post Revisions",
+        "description": "Reduces database bloat by limiting the number of post revisions saved, applicable to all post types.",
+        "tags": [ "Admin", "Post" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. User Story:\n - As a Site Administrator, I want to configure the maximum number of revisions per content item so that the database size is reduced while applying the limit to all post types.\n\n2. Example:\n - When an administrator sets the revision limit to 5 via an admin settings page, upon saving any content (post, page, or custom type), only the latest 5 revisions are retained, and older revisions are automatically discarded.\n\n3. Features:\n - Implement an admin settings page where the Site Administrator can set the maximum number of revisions.\n - Integrate with the WordPress hook \"wp_revisions_to_keep\" to enforce the configurable revision limit.\n - Ensure that the revision limit applies to all post types by overriding the default behavior.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/limit-post-revisions/0.jpg",
+        "playground": "https://tinyurl.com/56t2bapp",
+        "pro-only": "false"
+    },
+    {
+        "title": "Related Posts by Category",
+        "description": "Fetches and displays a list of five related posts from the same category to boost user engagement and content discovery.",
+        "tags": [ "Post", "Frontend" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a website visitor**, I want to see a list of 5 related posts from the same category as the current post so that I can easily discover similar content.\n2. **Example**: When a visitor reads a blog post about \"Healthy Recipes\" that is categorized under \"Food & Nutrition\", the plugin automatically displays 5 other posts from the \"Food & Nutrition\" category.\n3. **Features**:\n - Retrieve the current post's ID and associated category IDs using native WordPress functions.\n - Query the database for 5 posts that share at least one category with the current post, excluding the current post itself.\n - Dynamically render a section titled \"Related Posts\" that displays the titles of the queried posts.\n - Reset the post data after executing the query to preserve WordPress global state.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/related-posts-category/0.jpg",
+        "playground": "https://tinyurl.com/mv6rhvum",
+        "pro-only": "true"
+    },
+    {
+        "title": "Remove WordPress Version Number",
+        "description": "Improves website security by removing the WordPress version number from both the frontend and RSS feeds.",
+        "tags": [ "Admin" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a WordPress site administrator**, I want to hide the WordPress version number from my site's frontend and feeds so that I can enhance the security of my website by preventing potential attackers from knowing the version of WordPress I am using.\n2. **Example**: When a visitor views the source code of the website or accesses the RSS feed, the WordPress version number should not be visible.\n3. **Features**:\n - Implement a filter to remove the WordPress version number from the HTML meta tag in the site's frontend.\n - Implement a filter to remove the WordPress version number from RSS feeds.\n - Ensure the plugin automatically applies these filters upon activation without requiring additional configuration.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/remove-wordpress-version-number/0.jpg",
+        "playground": "https://tinyurl.com/2vmzzv3y",
+        "pro-only": "true"
+    },
+    {
+        "title": "Scroll Progress Bar",
+        "description": "Adds a dynamic scroll progress bar on single post pages, helping readers gauge their progress through the content.",
+        "tags": [ "Frontend" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a website visitor**, I want to see a progress bar at the top of single post pages as I scroll so that I can visually track my reading progress on the page.\n2. **Example**:\n - When a user visits a blog post, a thin progress bar appears at the top of the page. As the user scrolls down, the bar fills up, indicating how much of the page has been read.\n3. **Features**:\n - Implement a progress bar that appears at the top of single post pages and fills as the user scrolls.\n - Ensure the progress bar updates dynamically as the user scrolls.\n - Integrate the progress bar script and styles using the `wp_head` and `wp_footer` hooks.\n - Allow customization of the progress bar's color and thickness through a settings page in the WordPress admin panel.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/scroll-progress-bar/admin.jpg,https://aiko-developer.bold-themes.com/import/screenshots/scroll-progress-bar/fe.jpg",
+        "playground": "https://tinyurl.com/3y4wx8xp",
+        "pro-only": "true"
+    },
+    {
+        "title": "Show Active Plugins First",
+        "description": "Reorders the plugins list in wp-admin so that active plugins appear at the top, enhancing management efficiency.",
+        "tags": [ "Admin", "Plugins" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a WordPress administrator**, I want to see active plugins listed first in the wp-admin plugin list so that I can easily manage and prioritize active plugins.\n2. **Example**:\n - When accessing the plugins page in the WordPress admin dashboard, the list should display all active plugins at the top, followed by inactive plugins.\n3. **Features**:\n - Implement a sorting mechanism to reorder the plugin list, displaying active plugins before inactive ones automatically every time the plugins page is accessed.\n - Utilize the `views_plugins` filter to modify the default plugin list view in the WordPress admin dashboard, ensuring no other filters are used for this purpose.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/show-active-plugins-first/0.jpg",
+        "playground": "https://tinyurl.com/4275ethx",
+        "pro-only": "false"
+    },
+    {
+        "title": "Simple Table Of Contents",
+        "description": "Automatically generates a navigable table of contents from h2 and h3 headings within posts to improve readability and navigation.",
+        "tags": [ "Frontend" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. User Story:\n - As a blog post author, I want the plugin to automatically generate and insert a table of contents from my post’s h2 and h3 headings so that my readers can quickly navigate through the content.\n\n2. Example:\n - When a user views a single blog post, the plugin will parse the post content for h2 and h3 headings, generate unique ID attributes for any heading lacking one using a sanitized version of the heading text, compile these headings into a list with associated ID links, and prepend the generated table of contents at the top of the post.\n\n3. Features:\n - Detect when a post is being displayed in a single view, within the main loop, and during the main query.\n - Verify that the post content is not empty and that the DOMDocument class is available before processing.\n - Use the DOMDocument class to parse the post content and identify h2 and h3 heading elements.\n - For each identified heading, generate and assign a unique ID using a sanitized version of its text if the heading does not already have one.\n - Compile a navigable list of the headings’ text and associated ID links to form the table of contents.\n - Prepend the generated table of contents to the beginning of the post content prior to display.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/simple-table-of-contents/0.png",
+        "playground": "https://tinyurl.com/4ayhbjp6",
+        "pro-only": "true"
+    },
+    {
+        "title": "WooCommerce Cart Minimum",
+        "description": "Enforces a minimum cart total during checkout, ensuring customers meet a specified spending threshold before proceeding.",
+        "tags": [ "WooCommerce" ],
+        "model": "gpt-4o",
+        "temperature": "0.0",
+        "prompt": "1. **User Story**:\n - **As a WooCommerce store owner**, I want to set a minimum cart total for checkout so that I can ensure that customers meet a specified spending threshold before completing their purchase.\n2. **Example**: A store owner sets a minimum cart total of $50. If a customer tries to check out with a cart total of $30, an error message will be displayed, preventing the checkout process until the cart total meets the minimum requirement.\n3. **Features**:\n - The plugin must provide an admin settings page where the store owner can specify the minimum cart value.\n - The plugin must validate the cart total during the checkout process using the 'woocommerce_check_cart_items' action hook.\n - If the cart total is less than the specified minimum, the plugin must display an error notice to the user and halt the checkout process.\n - The plugin must register the minimum cart value setting using the WordPress settings API.\n - The plugin must ensure that the minimum cart value is stored as an integer in the database.",
+        "screenshots": "https://aiko-developer.bold-themes.com/import/screenshots/woocommerce-cart-minimum/0.jpg",
+        "playground": "https://tinyurl.com/mstr5jbf",
+        "pro-only": "true"
+    }
+]

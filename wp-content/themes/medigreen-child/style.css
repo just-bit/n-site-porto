@@ -1,0 +1,762 @@
+/*
+ Theme Name:   Medigreen Child
+ Theme URI:    http://medigreen.bold-themes.com
+ Description:  Medigreen child theme
+ Author:       BoldThemes
+ Author URI:   http://bold-themes.com
+ Template:     medigreen
+ Version:      1.0.0
+ Tags:         one-column, right-sidebar, custom-menu, featured-images, sticky-post, theme-options, threaded-comments, translation-ready
+ Text Domain:  medigreen-child
+*/
+
+
+/* Theme customization starts here
+-------------------------------------------------------------- */
+
+.btMenuWeight_default .menuPort nav ul li a:hover {
+	color: #7ab800 !important;
+}
+
+.btMenuHorizontal .menuPort > nav > ul > li {
+	padding-right: 40px;
+}
+
+@media (min-width: 1200px) {
+	.btMenuHorizontal .menuPort > nav > ul > li {
+		padding-right: 40px !important;
+	}
+
+	/* top bar */
+	.mainHeaderInner .port {
+		max-width: 1600px;
+		margin: 0 auto;
+	}
+
+	.mainHeaderInner .port nav {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	.menuPort nav ul a {
+		font-size: 16px;
+	}
+
+	div.btButtonWidget {
+		font-size: 16px !important;
+
+	}
+
+	div.btButtonWidget a.btButtonWidgetLink {
+		padding: 8px 20px !important;
+	}
+}
+
+.btMenuHorizontal div.btButtonWidget:not(:first-child) {
+	margin-left: 20px !important;
+}
+
+/* Secondary Menu Bar */
+.btSecondaryMenuBar {
+	background: #1a3a5c;
+	padding: 15px 0;
+}
+
+.btSecondaryMenuBar .port {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 30px;
+}
+
+.btSecondaryMenuBar .btSecondaryNav ul {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.btSecondaryMenuBar .btSecondaryNav ul li a {
+	color: #fff;
+	font-size: 16px;
+	font-weight: 600;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+.btSecondaryMenuBar .btSecondaryNav ul li a:hover {
+	color: #7ab800;
+}
+
+.bt_bb_icon .bt_bb_icon_holder:before {
+	font-size: 20px;
+}
+
+.btCartWidgetIcon:hover .bt_bb_icon_holder:before {
+	color: #7ab800;
+}
+
+.dgwt-wcas-widget {
+	margin-right: 20px;
+}
+
+.dgwt-wcas-widget .dgwt-wcas-ico-magnifier-handler path {
+	transition: fill 0.3s ease;
+}
+
+.dgwt-wcas-widget:hover .dgwt-wcas-ico-magnifier-handler path {
+	fill: #7ab800;
+}
+
+.dgwt-wcas-style-pirx .dgwt-wcas-sf-wrapp button.dgwt-wcas-search-submit {
+	box-shadow: none;
+}
+
+.btVerticalHeaderTop_mob {
+	display: none;
+}
+
+@media (max-width: 1199px) {
+	.btMenuVertical .mainHeader {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.btSecondaryMenuBar {
+		margin-top: 10px;
+		padding: 0;
+		border-top: 1px solid #fff;
+	}
+
+	.btSecondaryMenuBar .btSecondaryNav ul {
+		flex-direction: column;
+	}
+
+	.btMenuVertical .mainHeader nav ul li a {
+		padding: 7px 0 !important;
+	}
+
+	.btMenuVertical .mainHeader nav ul li a:hover {
+		color: #7ab800 !important;
+	}
+
+	.btSecondaryMenuBar .btSecondaryNav ul {
+		gap: 7px !important;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+
+	.btVerticalHeaderTop_mob {
+		display: flex;
+	}
+
+	.btTopBox.woocommerce.widget_shopping_cart,
+	.btTopBox.woocommerce.dgwt-wcas-widget {
+		display: none;
+	}
+
+	.menuPort .topBarInMenu {
+		order: 1;
+		margin: 0 !important;
+		margin-top: -5px !important;
+		margin-bottom: 10px !important;
+	}
+
+	.btSecondaryMenuBar,
+	.mainHeader.btClear {
+		background-color: #004471 !important;
+	}
+
+	.btVerticalHeaderTop_mob .btButtonWidgetText {
+		display: flex;
+		align-items: center;
+		text-align: center;
+		font-size: 14px;
+		font-weight: 600;
+		height: 30px;
+		background-color: #fff;
+		border-radius: 30px;
+		padding: 2px 15px;
+		color: #181818;
+	}
+
+	.bt_bb_icon:before, .bt_bb_icon:after, .bt_bb_icon :before {
+		border-top-color: #fff !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.btVerticalHeaderTop_mob .btButtonWidgetText {
+		display: none;
+	}
+
+	.btVerticalHeaderTop_mob .btButtonWidgetLink {
+		display: none;
+	}
+}
+
+.cart-contents {
+	top: -6px !important;
+	right: -7px !important;
+	border-radius: 50% !important;
+	width: auto !important;
+	min-width: 15px !important;
+	height: 15px;
+}
+
+/* == hero => */
+
+.section-hero {
+	margin-top: 125px;
+	/*margin-top: 100px;*/
+
+	img {
+		width: 100% !important;
+		height: 100% !important;
+		object-fit: contain !important;
+	}
+
+	.bt_bb_image > a,
+	.bt_bb_image > span {
+		width: 100%;
+	}
+}
+
+.main-h1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+	padding: 0 20px;
+	text-transform: uppercase;
+
+	h1 {
+		margin: 0 !important;
+		padding: 8px 0 !important;
+		text-align: center;
+		font-size: 18px;
+		font-weight: 600 !important;
+		line-height: 1 !important;
+		color: #004471;
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.section-hero {
+		margin-top: 42px;
+	}
+}
+
+@media screen and (max-width: 574px) {
+	.main-h1 {
+		h1 {
+			margin: 0 !important;
+			padding: 8px 0 !important;
+			text-align: center;
+			font-size: 14px;
+		}
+	}
+}
+
+/* <= hero == */
+
+/* == section adv => */
+
+@media screen and (max-width: 574px) {
+	.section-advantages .bt_bb_row_holder {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.section-advantages .bt_bb_raw_content > div {
+		font-size: 14px !important;
+	}
+}
+
+/* <= section adv == */
+
+/* == section categories => */
+.section-categories {
+	position: relative;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: -96px;
+		left: -176px;
+		width: 410px;
+		height: 420px;
+		box-shadow: none !important;
+		z-index: -1;
+		background-image: url(/wp-content/uploads/2018/12/marijuana_leaf_large.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	.section-categories {
+		&:before {
+			top: -109px;
+			left: 29px;
+			width: 205px;
+			height: 205px;
+		}
+	}
+}
+
+@media screen and (max-width: 574px) {
+	.section-categories {
+		&:before {
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+}
+
+/* <= section categories == */
+
+/* == block slick slider => */
+
+.bt_bb_height_full_screen .slick-slider .slick-slide {
+	height: auto;
+}
+
+.bt_bb_arrows_size_small button.slick-arrow {
+	margin-top: -90px;
+}
+
+@media screen and (max-width: 767px) {
+	.bt_bb_arrows_size_small button.slick-arrow {
+		margin-top: -80px;
+	}
+}
+
+.bt_bb_single_product .bt_bb_single_product_image a img {
+	max-height: 293px;
+}
+
+.slick-slider .bt_bb_single_product_title {
+	margin-bottom: 10px;
+	text-align: center;
+	line-height: 1.2;
+	padding-right: 10px;
+	padding-left: 10px;
+	height: 51px;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
+}
+
+.slick-slider button.slick-arrow.slick-prev {
+	left: 8px;
+}
+
+.slick-slider button.slick-arrow.slick-next {
+	right: 8px;
+}
+
+.slick-slider .bt_bb_single_product_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.slick-slider .bt_bb_single_product {
+	padding-bottom: 25px;
+	border: 1px solid rgba(0, 0, 0, .07);
+}
+
+@media screen and (max-width: 767px) {
+	.slick-slider .bt_bb_single_product {
+		padding-bottom: 20px;
+	}
+
+	.bt_bb_arrows_size_small button.slick-arrow {
+		width: 25px;
+		height: 25px;
+	}
+
+	.bt_bb_single_product .bt_bb_single_product_content .bt_bb_single_product_price_cart a {
+		padding: 7px 20px !important;
+	}
+}
+
+/* <= block slick slider == */
+
+/* == section telegram => */
+
+.section-telegram-inner {
+	margin-bottom: -147px;
+	position: relative;
+	z-index: 1;
+}
+
+@media screen and (max-width: 992px) {
+	.section-telegram-inner > div {
+		gap: 20px;
+	}
+
+	.section-telegram-inner {
+		margin-bottom: -130px;
+		position: relative;
+		z-index: 1;
+	}
+}
+
+/* <= section telegram == */
+
+/* == section latest posts => */
+
+.bt_bb_latest_posts {
+	align-items: stretch;
+}
+
+.bt_bb_columns_3.bt_bb_latest_posts .bt_bb_latest_posts_item {
+	align-self: stretch;
+}
+
+@media screen and (max-width: 1199px) {
+	.bt_bb_latest_posts {
+		display: flex !important;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		padding-bottom: 30px;
+	}
+
+	.bt_bb_latest_posts > div {
+		min-width: 412px;
+		width: 412px;
+	}
+}
+
+@media screen and (max-width: 574px) {
+	.bt_bb_latest_posts {
+		padding-right: 8px;
+		padding-left: 8px;
+		scroll-snap-type: x mandatory;
+	}
+
+	.bt_bb_latest_posts > div {
+		min-width: calc(100% - 20px);
+		width: calc(100% - 20px);
+		padding: 2em 8px 0 !important;
+		scroll-snap-align: center;
+	}
+
+}
+
+.bt_bb_latest_posts_item_image {
+	height: 232px;
+	overflow: hidden;
+}
+
+.bt_bb_latest_posts_item_link img {
+	scale: 1.01;
+	transition: scale ease 0.3s;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.bt_bb_latest_posts_item_link:hover img {
+	scale: 1.1;
+}
+
+.bt_bb_latest_posts .bt_bb_latest_posts_item .bt_bb_latest_posts_item_content {
+	display: flex;
+	flex-direction: column;
+	height: 170px !important;
+	padding: 1.5em 2em !important;
+}
+
+.bt_bb_latest_posts .bt_bb_latest_posts_item .bt_bb_latest_posts_item_content .bt_bb_latest_posts_item_title {
+	flex: 1 !important;
+	max-height: 77px !important;
+	margin-bottom: 15px !important;
+	font-size: 21px !important;
+}
+
+@media screen and (max-width: 574px) {
+	.bt_bb_latest_posts .bt_bb_latest_posts_item .bt_bb_latest_posts_item_content .bt_bb_latest_posts_item_title {
+		max-height: 116px !important;
+		font-size: 19px !important;
+	}
+
+	.bt_bb_latest_posts .bt_bb_latest_posts_item .bt_bb_latest_posts_item_content {
+		height: 180px !important;
+	}
+}
+
+.bt_bb_latest_posts .bt_bb_latest_posts_item .bt_bb_latest_posts_item_content .bt_bb_latest_posts_item_meta {
+	flex: 0 !important;
+	margin-top: auto !important;
+	padding: 0 !important;
+}
+
+/* <= section latest posts == */
+
+/* == block faq => */
+
+.bt_bb_accordion_item_title {
+	position: relative;
+	padding-right: 45px !important;
+}
+
+.bt_bb_accordion_item_title:after {
+	content: "";
+	position: absolute;
+	right: 10px;
+	top: 13px;
+	width: 25px;
+	height: 25px;
+	background-color: #004471;
+	-webkit-mask: url("/wp-content/uploads/2025/12/arrow.svg");
+	mask: url("/wp-content/uploads/2025/12/arrow.svg");
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+@media screen and (max-width: 574px) {
+	.bt_bb_accordion_item_title:after {
+		top: 10px;
+	}
+}
+
+.bt_bb_accordion_item_title:hover:after {
+	background-color: #fff;
+}
+
+.bt_bb_accordion_item.on .bt_bb_accordion_item_title:after {
+	background-color: #fff;
+	transform: rotate(180deg);
+}
+
+/* <= block faq == */
+
+/* == footer => */
+
+.footer-top {
+	position: relative;
+}
+
+.footer-top:after {
+	content: "";
+	position: absolute;
+	left: 15px;
+	bottom: 5px;
+	width: calc(100% - 20px);
+	height: 1px;
+	background-color: #fff;
+}
+
+.menu-primary-menu-container {
+	display: flex;
+	justify-content: end;
+	padding-top: 10px;
+}
+
+.bt_bb_orientation_horizontal.bt_bb_custom_menu div ul {
+	display: flex !important;
+	flex-wrap: wrap;
+	margin: 0 !important;
+}
+
+.bt_bb_orientation_horizontal.bt_bb_custom_menu div ul li {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+.bt_bb_orientation_horizontal.bt_bb_custom_menu div ul li a {
+	padding: 7px 10px !important;
+}
+
+@media screen and (max-width: 992px) {
+	.bt_bb_orientation_horizontal.bt_bb_custom_menu div ul {
+		justify-content: center;
+	}
+
+	.bt_bb_custom_menu div ul a {
+		font-size: 14px;
+	}
+}
+
+/* <= footer == */
+
+/* lang */
+
+.lang-switcher-slugs {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	gap: 5px;
+	margin-right: 20px;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #80a2b8;
+
+	a:hover {
+		color: #7ab800 !important;
+	}
+}
+
+a.active-lang {
+	color: #fff !important;
+	pointer-events: none;
+}
+
+/* lang ^ */
+
+/* product */
+
+.bt_bb_single_product .bt_bb_single_product_content .bt_bb_single_product_price_cart a.added:after {
+	right: 17px !important;
+	top: 16px !important;
+}
+
+ul.products li.product .btWooShopLoopItemInner .added_to_cart,
+.bt_bb_single_product .bt_bb_single_product_content .bt_bb_single_product_price_cart a.added_to_cart {
+	position: absolute !important;
+	opacity: 0 !important;
+	pointer-events: none;
+}
+
+.woocommerce-terms-and-conditions-wrapper {
+	margin-bottom: 30px;
+}
+
+.wc-empty-cart-message {
+	margin-top: 60px;
+}
+
+.return-to-shop {
+	margin-bottom: 60px !important;
+}
+
+ul.products li.product .btWooShopLoopItemInner {
+	display: flex !important;
+	flex-direction: column;
+}
+
+ul.products li.product .btWooShopLoopItemInner .ajax_add_to_cart {
+	margin-top: auto !important;
+}
+
+.woocommerce-cart .bt_bb_row_holder .bt_bb_column .bt_bb_column_content {
+	margin-top: 60px !important;
+}
+
+
+
+/* button clear in catalog */
+.woof_products_top_panel {
+	display: none !important;
+}
+
+/* active/reset */
+
+body {
+	display: flex;
+	width: 100%;
+	min-height: 100vh !important;
+}
+
+.btPageWrap {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.btSiteFooter {
+	margin-top: auto;
+}
+
+.current-menu-item a {
+	color: #7ab800 !important;
+}
+
+.current-cat a {
+	font-weight: 600;
+}
+
+.button br,
+.quantity br,
+.checkout-button br {
+	display: none !important;
+}
+
+td.actions p {
+	display: contents;
+}
+
+.simple-translate-system-theme {
+	display: none !important;
+}
+
+/* linked products */
+
+.linked-products {
+    margin: 1em 0;
+}
+.linked-products h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.linked-products-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.linked-product-item {
+    width: 60px;
+    height: 60px;
+	overflow: hidden;
+}
+.linked-product-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.linked-product-item a:hover,
+.linked-product-item a:focus {
+    border-color: #333;
+}
+.linked-product-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.linked-product-item .product-title {
+    display: none;
+}
+
+.linked-product-item.current-flavor span{
+	display: flex;
+    border: 1px solid #333;
+}
+

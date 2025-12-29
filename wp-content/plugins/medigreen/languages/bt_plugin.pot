@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-25 11:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: medigreen.php:27
+msgid "Header Left Widgets"
+msgstr ""
+
+#: medigreen.php:33
+msgid "Header Right Widgets"
+msgstr ""
+
+#: medigreen.php:39
+msgid "Header Menu Widgets"
+msgstr ""
+
+#: medigreen.php:45
+msgid "Header Logo Widgets"
+msgstr ""
+
+#: medigreen.php:51
+msgid "Footer Widgets"
+msgstr ""
+
+#: medigreen.php:68
+msgid "Portfolio"
+msgstr ""
+
+#: medigreen.php:69
+msgid "Portfolio Item"
+msgstr ""
+
+#: medigreen.php:78
+msgid "Portfolio Categories"
+msgstr ""
+
+#: medigreen.php:107
+msgid "BB Button"
+msgstr ""
+
+#: medigreen.php:109
+msgid "Button with text and link."
+msgstr ""
+
+#: medigreen.php:163
+msgid "Text:"
+msgstr ""
+
+#: medigreen.php:167
+msgid "URL or slug:"
+msgstr ""
+
+#: medigreen.php:171
+msgid "Target:"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:20
+msgid "Custom JS"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:46 framework_bt_plugin/framework.php:194
+#: framework_bt_plugin/framework.php:341 framework_bt_plugin/framework.php:471
+msgid "Share on Facebook"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:70 framework_bt_plugin/framework.php:218
+#: framework_bt_plugin/framework.php:365 framework_bt_plugin/framework.php:486
+#: framework_bt_plugin/framework.php:501
+msgid "Share on Twitter"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:95 framework_bt_plugin/framework.php:242
+msgid "Share on Twitter (X)"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:120 framework_bt_plugin/framework.php:267
+#: framework_bt_plugin/framework.php:389
+msgid "Share on LinkedIn"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:144 framework_bt_plugin/framework.php:291
+#: framework_bt_plugin/framework.php:413 framework_bt_plugin/framework.php:532
+msgid "Share on VK"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:168 framework_bt_plugin/framework.php:315
+#: framework_bt_plugin/framework.php:437 framework_bt_plugin/framework.php:548
+msgid "Share on WhatsApp"
+msgstr ""
+
+#: framework_bt_plugin/framework.php:516
+msgid "Share on Linkedin"
+msgstr ""

@@ -1,0 +1,60 @@
+Version 1.3.0 - 25 April 25
+    - Improved WP 6.8 compatibility
+Version 1.2.9 - 18 April 25
+    - Improved WP 6.8 compatibility
+Version 1.2.8 - 10 February 25
+    - Minor bug fixes
+Version 1.2.7 - 27 November 24
+    - Fixed translation related PHP notice
+Version 1.2.6 - 2 November 24
+    - Fixed layout
+Version 1.2.5 - 24 July 24
+    - Improved demo import
+Version 1.2.4 - 14 November 23
+    - Improved Bold Builder AI support
+Version 1.2.3 - 21 June 23
+    - Improved WooCommerce compatibility
+Version 1.2.2 - 31 March 23
+    - Fixed WP 6.2 issue
+Version 1.2.1 - 24 February 23
+    - Improved WooCommerce compatibility
+Version 1.2.0 - 11 February 23
+    - Improved WooCommerce compatibility
+Version 1.1.9 - 6 September 22
+    - Import plugin update
+Version 1.1.8 - 13 June 22
+    - Minor bug fixes
+Version 1.1.7 - 28 January 22
+    - Added new Google Fonts
+Version 1.1.6 - 21 January 22
+    - Improved Bold Builder compatibility
+Version 1.1.5 - 8 December 21
+    - Improved Bold Builder compatibility
+Version 1.1.4 - 20 August 21
+    - Improved WooCommerce compatibility
+Version 1.1.3 - 9 April 21
+    - Updated demo content
+Version 1.1.2 - 31 March 21
+    - Added support for Lightweight Sidebar Manager plugin
+Version 1.1.1 - 4 February 21
+    - Bold Builder 3.x.x support
+Version 1.1.0 - 14 July 20
+    - Improved WoocCommerce compatibility
+Version 1.0.9 - 6 April 20
+    - Improved WoocCommerce compatibility
+Version 1.0.8 - 23 January 20
+    - Improved WoocCommerce compatibility
+Version 1.0.7 - 28 August 19
+    - Improved security
+Version 1.0.6 - 16 July 19
+    - Minor bug fixes
+Version 1.0.5 - 5 July 19
+    - Minor bug fixes
+Version 1.0.4 - 1 June 19
+    - Fixed Override Global Settings
+Version 1.0.3 - 30 May 19
+    - Minor bug fixes
+Version 1.0.2 - 13 April 19
+    - Fixed Google Maps
+Version 1.0.1 - 1 March 19
+    - Demo content update
