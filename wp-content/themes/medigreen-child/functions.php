@@ -23,10 +23,8 @@ function my_theme_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
-
 // Secondary menu
 add_action('after_setup_theme', 'medigreen_child_register_menus', 99);
-
 
 function medigreen_child_register_menus()
 {
