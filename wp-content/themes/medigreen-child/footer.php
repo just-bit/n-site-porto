@@ -2,7 +2,7 @@
 <?php
 
 if ( BoldThemesFramework::$has_sidebar ) {
-	include( get_parent_theme_file_path( 'sidebar.php' ) );					
+	include( get_theme_file_path( 'sidebar.php' ) );					
 }
 
 ?> 

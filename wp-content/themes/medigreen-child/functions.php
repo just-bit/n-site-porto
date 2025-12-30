@@ -23,6 +23,37 @@ function my_theme_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
+// Mobile class for btContentHolder
+add_action('wp_footer', 'add_mobile_content_holder_class');
+function add_mobile_content_holder_class() {
+    if ( function_exists('is_woocommerce') && is_woocommerce() && wp_is_mobile() ) {
+        ?>
+        <script>
+        document.querySelector('.btContentHolder')?.classList.add('btContentHolder-mobile');
+        </script>
+        <?php
+    }
+}
+
+// Title "On sale"
+add_action('wp_footer', 'add_onsale_filter_title');
+function add_onsale_filter_title() {
+    if (!is_shop() && !is_product_category() && !is_product_tag()) {
+        return;
+    }
+    ?>
+    <script>
+    jQuery(function($) {
+        var $container = $('.woof_checkbox_sales_container');
+        if ($container.length && !$container.prev('.woof_onsale_title').length) {
+            $container.before('<h4 class="woof_onsale_title">Products with promotions</h4>');
+        }
+    });
+    </script>
+    <?php
+}
+
+
 // Secondary menu
 add_action('after_setup_theme', 'medigreen_child_register_menus', 99);
 
@@ -289,4 +320,122 @@ function display_product_categories_after_cart()
         }
         echo '</div>';
     }
+}
+
+
+// Add price to variations
+
+// Sort variations by menu_order (drag-and-drop order in admin)
+add_filter('woocommerce_variation_prices', 'sort_variation_prices_by_menu_order', 10, 3);
+function sort_variation_prices_by_menu_order($prices_array, $product, $for_display) {
+    $variation_ids = $product->get_children();
+    
+    // Get variations with their menu_order
+    $variations_order = array();
+    foreach ($variation_ids as $variation_id) {
+        $variation = wc_get_product($variation_id);
+        if ($variation) {
+            $variations_order[$variation_id] = $variation->get_menu_order();
+        }
+    }
+    
+    // Sort by menu_order
+    asort($variations_order);
+    $sorted_ids = array_keys($variations_order);
+    
+    // Reorder all price arrays
+    foreach ($prices_array as $price_type => $prices) {
+        $sorted_prices = array();
+        foreach ($sorted_ids as $id) {
+            if (isset($prices[$id])) {
+                $sorted_prices[$id] = $prices[$id];
+            }
+        }
+        $prices_array[$price_type] = $sorted_prices;
+    }
+    
+    return $prices_array;
+}
+
+// Sort available variations by menu_order
+add_filter('woocommerce_available_variation', 'add_menu_order_to_variation', 10, 3);
+function add_menu_order_to_variation($data, $product, $variation) {
+    $data['menu_order'] = $variation->get_menu_order();
+    return $data;
+}
+
+// Add variation prices to attribute labels
+add_action('wp_footer', 'add_variation_prices_to_labels');
+function add_variation_prices_to_labels() {
+    if (!is_product()) return;
+    
+    global $product;
+    if (!$product || !$product->is_type('variable')) return;
+    ?>
+    <script>
+    jQuery(function($) {
+        var $form = $('form.variations_form');
+        if (!$form.length) return;
+        
+        var variations = $form.data('product_variations');
+        if (!variations) return;
+        
+        // Sort variations by menu_order
+        variations.sort(function(a, b) {
+            return (a.menu_order || 0) - (b.menu_order || 0);
+        });
+        
+        // Build price map: attribute_value => {price, order}
+        var priceMap = {};
+        
+        variations.forEach(function(variation, index) {
+            for (var attr in variation.attributes) {
+                var value = variation.attributes[attr];
+                if (value && !priceMap[value]) {
+                    priceMap[value] = {
+                        price: variation.display_price,
+                        order: variation.menu_order || index
+                    };
+                }
+            }
+        });
+        
+        // Reorder swatches by menu_order
+        $('.variable-items-wrapper').each(function() {
+            var $wrapper = $(this);
+            var $items = $wrapper.find('.variable-item');
+            
+            $items.sort(function(a, b) {
+                var aVal = $(a).data('value') || $(a).attr('data-value');
+                var bVal = $(b).data('value') || $(b).attr('data-value');
+                var aOrder = priceMap[aVal] ? priceMap[aVal].order : 999;
+                var bOrder = priceMap[bVal] ? priceMap[bVal].order : 999;
+                return aOrder - bOrder;
+            });
+            
+            $wrapper.append($items);
+        });
+        
+        // Update swatches/buttons with prices
+        $('.variable-items-wrapper .variable-item, .variations .value label, .wcvaswatches label').each(function() {
+            var $item = $(this);
+            var attrValue = $item.data('value') || $item.attr('data-value') || $item.find('input').val();
+            
+            if (attrValue && priceMap[attrValue] !== undefined) {
+                var price = priceMap[attrValue].price;
+                var formattedPrice = '<?php echo html_entity_decode(get_woocommerce_currency_symbol()); ?>' + parseFloat(price).toFixed(2);
+                
+                // Find text element
+                var $text = $item.find('.variable-item-span-text, .variable-item-contents, span:not(.price-label)').first();
+                if (!$text.length) $text = $item;
+                
+                var currentText = $text.text().trim();
+                if (currentText.indexOf('<?php echo get_woocommerce_currency_symbol(); ?>') === -1) {
+                    $text.html('<strong>' + formattedPrice + '</strong> - ' + currentText);
+                }
+            }
+        });
+    });
+    </script>
+    <?php
 }
