@@ -35,19 +35,19 @@
 	}
 }
 
- @media screen and (max-width: 1199px) {
-	 .logo {
-		 a {
-			 display: flex;
-			 height: 40px;
-			 align-items: center;
-		 }
+@media screen and (max-width: 1199px) {
+	.logo {
+		a {
+			display: flex;
+			height: 40px;
+			align-items: center;
+		}
 
-		 img {
-			 height: 30px !important;
-		 }
-	 }
- }
+		img {
+			height: 30px !important;
+		}
+	}
+}
 
 
 .btMenuWeight_default .menuPort nav ul li a:hover {
@@ -545,6 +545,11 @@
 /* <= section latest posts == */
 
 /* == block faq => */
+
+.bt_bb_accordion .bt_bb_accordion_item {
+	border-width: 1px !important;
+	margin-bottom: 5px !important;
+}
 
 .bt_bb_accordion_item_title {
 	position: relative;
