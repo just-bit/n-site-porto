@@ -14,6 +14,42 @@
 /* Theme customization starts here
 -------------------------------------------------------------- */
 
+.heading-aside {
+	width: 100% !important;
+	font-weight: 600 !important;
+	margin-top: 0 !important;
+	margin-bottom: 7px !important;
+	font-size: 18px !important;
+	padding: 0 !important;
+}
+
+.logo {
+	a {
+		display: flex;
+		height: 70px;
+		align-items: center;
+	}
+
+	img {
+		height: 40px !important;
+	}
+}
+
+ @media screen and (max-width: 1199px) {
+	 .logo {
+		 a {
+			 display: flex;
+			 height: 40px;
+			 align-items: center;
+		 }
+
+		 img {
+			 height: 30px !important;
+		 }
+	 }
+ }
+
+
 .btMenuWeight_default .menuPort nav ul li a:hover {
 	color: #7ab800 !important;
 }
@@ -190,7 +226,7 @@
 	}
 }
 
-@media (max-width: 480px) {
+@media (max-width: 574px) {
 	.btVerticalHeaderTop_mob .btButtonWidgetText {
 		display: none;
 	}
@@ -1179,6 +1215,23 @@ body.mobile-filters-open .btSidebar-overlay {
 		top: 50px;
 		max-width: 150px;
 	}
+}
+
+/* blog */
+
+body.category .btBox.widget_block,
+body.blog .btBox.widget_block {
+	margin-bottom: 20px !important;
+}
+
+body.category .btSidebar li a,
+body.blog .btSidebar li a {
+	padding: 4px 0 !important;
+}
+
+body.category .bt_bb_headline .bt_bb_headline_content a,
+body.blog .bt_bb_headline .bt_bb_headline_content a {
+	font-size: 14px !important;
 }
 
 /* checkout */
