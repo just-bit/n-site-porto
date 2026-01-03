@@ -23,6 +23,82 @@ function my_theme_enqueue_styles()
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
+// Enhance bt_bb_single_product - replace div with h2 for title
+add_filter('bt_bb_single_product_output', 'enhance_bb_single_product_output', 10, 2);
+function enhance_bb_single_product_output($output, $atts) {
+	$output = preg_replace(
+		'/<div class="bt_bb_single_product_title">(<a [^>]+>[^<]*<\/a>)<\/div>/',
+		'<h2 class="bt_bb_single_product_title">$1</h2>',
+		$output
+	);
+	return $output;
+}
+
+// Add outofstock class to bt_bb_single_product
+add_filter('bt_bb_single_product_class', 'add_outofstock_class_to_single_product', 10, 2);
+function add_outofstock_class_to_single_product($class, $atts) {
+	$product_id = isset($atts['product_id']) ? intval($atts['product_id']) : 0;
+	if ($product_id) {
+		$product = wc_get_product($product_id);
+		if ($product && !$product->is_in_stock()) {
+			$class[] = 'outofstock';
+		}
+	}
+	return $class;
+}
+
+// Remove sale badge from everywhere
+remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
+remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10);
+
+// Change "Add to cart" and "Select options" to "Shop" in catalog
+add_filter('woocommerce_product_add_to_cart_text', 'custom_add_to_cart_text', 10, 2);
+function custom_add_to_cart_text($text, $product) {
+	if (!$product->is_in_stock()) {
+		return 'Read More';
+	}
+	return 'Shop';
+}
+
+// Make "Shop" button link to product page instead of adding to cart
+add_filter('woocommerce_loop_add_to_cart_link', 'custom_loop_add_to_cart_link', 10, 2);
+function custom_loop_add_to_cart_link($link, $product) {
+	if ($product->is_in_stock()) {
+		return sprintf(
+			'<a href="%s" class="button product_type_%s">%s</a>',
+			esc_url($product->get_permalink()),
+			esc_attr($product->get_type()),
+			esc_html('Shop')
+		);
+	}
+	return $link;
+}
+
+// Show "From $X" instead of price range for variable products in catalog
+add_filter('woocommerce_variable_price_html', 'show_from_price_for_variable_products', 10, 2);
+function show_from_price_for_variable_products($price, $product) {
+	// Only apply in shop/archive (not on single product page)
+	if (is_product()) {
+		return $price;
+	}
+	
+	$prices = $product->get_variation_prices(true);
+	
+	if (empty($prices['price'])) {
+		return $price;
+	}
+	
+	$min_price = current($prices['price']);
+	$max_price = end($prices['price']);
+	
+	// Only change if there's actually a range
+	if ($min_price !== $max_price) {
+		return '<span class="price-from">From </span>' . wc_price($min_price, array('decimals' => 0));
+	}
+	
+	return $price;
+}
+
 // Mobile class for btContentHolder
 add_action('wp_footer', 'add_mobile_content_holder_class');
 function add_mobile_content_holder_class()

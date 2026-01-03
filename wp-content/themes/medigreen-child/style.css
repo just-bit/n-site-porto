@@ -450,6 +450,7 @@
 	padding-right: 10px;
 	padding-left: 10px;
 	height: 51px;
+	font-weight: 600 !important;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
@@ -748,6 +749,11 @@ ul.products li.product .btWooShopLoopItemInner .added_to_cart,
 	position: absolute !important;
 	opacity: 0 !important;
 	pointer-events: none;
+}
+
+/* Hide sale badge everywhere */
+.onsale {
+	display: none !important;
 }
 
 .woocommerce-terms-and-conditions-wrapper {
@@ -1064,6 +1070,11 @@ li.product.outofstock {
 	.button {
 		opacity: 0.5;
 	}
+}
+
+div.outofstock .bt_bb_single_product_image,
+div.outofstock .bt_bb_single_product_content{
+	opacity: 0.5;
 }
 
 .stock-status {
