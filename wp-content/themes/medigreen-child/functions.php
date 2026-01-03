@@ -51,6 +51,9 @@ function add_outofstock_class_to_single_product($class, $atts) {
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
 remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10);
 
+// Remove default loop price (we display it in content-product.php template)
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
+
 // Change "Add to cart" and "Select options" to "Shop" in catalog
 add_filter('woocommerce_product_add_to_cart_text', 'custom_add_to_cart_text', 10, 2);
 function custom_add_to_cart_text($text, $product) {
@@ -74,28 +77,31 @@ function custom_loop_add_to_cart_link($link, $product) {
 	return $link;
 }
 
+
 // Show "From $X" instead of price range for variable products in catalog
-add_filter('woocommerce_variable_price_html', 'show_from_price_for_variable_products', 10, 2);
+// TEMPORARILY DISABLED - testing WOOF issue
+// add_filter('woocommerce_variable_price_html', 'show_from_price_for_variable_products', 10, 2);
 function show_from_price_for_variable_products($price, $product) {
 	// Only apply in shop/archive (not on single product page)
-	if (is_product()) {
+	// Use wp_doing_ajax() to handle WOOF AJAX filtering correctly
+	if (is_product() && !wp_doing_ajax()) {
 		return $price;
 	}
-	
+
 	$prices = $product->get_variation_prices(true);
-	
+
 	if (empty($prices['price'])) {
 		return $price;
 	}
-	
+
 	$min_price = current($prices['price']);
 	$max_price = end($prices['price']);
-	
+
 	// Only change if there's actually a range
 	if ($min_price !== $max_price) {
 		return '<span class="price-from">From </span>' . wc_price($min_price, array('decimals' => 0));
 	}
-	
+
 	return $price;
 }
 
@@ -536,3 +542,143 @@ function add_variation_prices_to_labels()
 	</script>
 	<?php
 }
+
+// breadcrumbs
+function breadcrumbs()
+{
+    $site_url = '/';
+    $home_name = 'Buy weed online';
+    $shop_name = 'Catalog';
+
+    if (!is_front_page()) {
+        if (!is_home()) {
+            echo '<div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="breadcrumbs"><span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . $site_url . '">' . $home_name . '</a><meta itemprop="position" content="1" /><meta itemprop="name" content="' . $home_name . '" /></span> ';
+
+            if (is_product()) { // WooCommerce product
+                $terms = get_the_terms(get_the_ID(), 'product_cat');
+                if ($terms && !is_wp_error($terms)) {
+                    $term = $terms[0];
+                    echo '<span>/</span> ';
+                    echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . get_term_link($term) . '">' . $term->name . '</a><meta itemprop="position" content="2" /><meta itemprop="name" content="' . $term->name . '" /></span> ';
+                }
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . get_the_title() . '<meta itemprop="item" content="' . get_the_permalink() . '"><meta itemprop="name" content="' . get_the_title() . '" /><meta itemprop="position" content="3" /></span>';
+
+            } elseif (is_shop()) { // WooCommerce shop
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . $shop_name . '<meta itemprop="item" content="' . get_permalink(wc_get_page_id('shop')) . '"><meta itemprop="name" content="' . $shop_name . '" /><meta itemprop="position" content="2" /></span>';
+
+            } elseif (is_product_category()) { // WooCommerce category
+                $term = get_queried_object();
+                echo '<span>/</span> ';
+                echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . get_permalink(wc_get_page_id('shop')) . '">' . $shop_name . '</a><meta itemprop="position" content="2" /><meta itemprop="name" content="' . $shop_name . '" /></span> ';
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . $term->name . '<meta itemprop="item" content="' . get_term_link($term) . '"><meta itemprop="name" content="' . $term->name . '" /><meta itemprop="position" content="3" /></span>';
+
+            } elseif (is_single()) { // posts
+                echo '<span>/</span> ';
+                echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . site_url('/blog') . '/">Blog</a><meta itemprop="position" content="2" /><meta itemprop="name" content="Blog" /></span> ';
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . get_the_title() . '<meta itemprop="item" content="' . get_the_permalink() . '"><meta itemprop="name" content="' . get_the_title() . '" /><meta itemprop="position" content="3" /></span>';
+
+            } elseif (is_category()) { // tag pages
+                $tag = get_queried_object();
+                echo '<span>/</span> ';
+                echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . site_url('/blog') . '/">Blog</a><meta itemprop="position" content="2" /><meta itemprop="name" content="Blog" /></span> ';
+                echo '<span>/</span> ';
+
+                $pageNum = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+                if ($pageNum > 1) {
+                    echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . get_tag_link($tag) . '">' . $tag->name . '</a><meta itemprop="name" content="' . $tag->name . '" /><meta itemprop="position" content="3" /></span> ';
+                    echo '<span class="divider">/</span> ';
+                    echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">Page ' . $pageNum . '<meta itemprop="name" content="Page ' . $pageNum . '" /><meta itemprop="position" content="4" /></span>';
+                } else {
+                    echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . $tag->name . '<meta itemprop="item" content="' . get_tag_link($tag) . '"><meta itemprop="name" content="' . $tag->name . '" /><meta itemprop="position" content="3" /></span>';
+                }
+            } elseif (is_page()) { // pages
+                $post = get_post();
+                $pos = 0;
+                global $wp_query;
+                $object = $wp_query->get_queried_object();
+                $parent_id  = $object->post_parent;
+                $depth = 0;
+                while ($parent_id > 0) {
+                    $page = get_page($parent_id);
+                    $parent_id = $page->post_parent;
+                    $depth++;
+                }
+
+                if ($post->post_parent) {
+                    $parent_id = $post->post_parent;
+                    $breadcrumbs = array();
+
+                    while ($parent_id) {
+                        $pos++;
+                        $page = get_post($parent_id);
+                        $crumb_title = get_the_title($page->ID);
+
+                        $breadcrumbs[] = '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . get_permalink($page->ID) . '">' . $crumb_title . '</a><meta itemprop="name" content="' . $crumb_title . '" /><meta itemprop="position" content="' . ($depth + 2 - $pos) . '" /></span>';
+                        $parent_id = $page->post_parent;
+                    }
+
+                    $breadcrumbs = array_reverse($breadcrumbs);
+
+                    foreach ($breadcrumbs as $crumb) {
+                        echo $crumb;
+                    }
+                }
+
+                $page_title = get_the_title();
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . $page_title . '<meta itemprop="item" content="' . get_the_permalink() . '"><meta itemprop="name" content="' . $page_title . '" /><meta itemprop="position" content="' . ($depth + 2) . '" /></span>';
+            } elseif (is_404()) { // 404 page
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">Page not found<meta itemprop="name" content="404" /><meta itemprop="position" content="2" /></span>';
+            } elseif (is_search()) { // search results
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">Search results<meta itemprop="item" content="' . get_search_link() . '"><meta itemprop="name" content="Search results" /><meta itemprop="position" content="2" /></span>';
+            } elseif(is_tax('strain')){
+                echo '<span class="divider">/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . site_url('/strains') . '/">Strains</a><meta itemprop="name" content="Strains" /><meta itemprop="position" content="2" /></span> ';
+                $tag = get_queried_object();
+                $pageNum = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                if ($pageNum > 1) {
+                    echo '<span class="divider">/</span> ';
+                    echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . get_tag_link($tag) . '">' . $tag->name . '</a><meta itemprop="item" content="' . get_tag_link($tag) . '"><meta itemprop="name" content="' . $tag->name . '" /><meta itemprop="position" content="3" /></span> ';
+                    echo '<span class="divider">/</span> ';
+                    echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">Page ' . $pageNum . '<meta itemprop="name" content="Page ' . $pageNum . '" /><meta itemprop="position" content="4" /></span>';
+                } else {
+                    echo '<span class="divider">/</span> ';
+                    echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . $tag->name . '<meta itemprop="item" content="' . get_tag_link($tag) . '"><meta itemprop="name" content="' . $tag->name . '" /><meta itemprop="position" content="3" /></span>';
+                }
+            }
+
+
+            echo '</div>';
+        } else {
+            echo '<div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="breadcrumbs"><span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . $site_url . '">' . $home_name . '</a><meta itemprop="name" content="' . $home_name . '" /><meta itemprop="position" content="1" /></span> ';
+            $pageNum = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+            if ($pageNum > 1) {
+                echo '<span>/</span> ';
+                echo '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . get_post_type_archive_link('post') . '">Blog</a><meta itemprop="name" content="Blog" /><meta itemprop="position" content="2" /></span> ';
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">Page ' . $pageNum . '<meta itemprop="item" content="' . get_post_type_archive_link('post') . 'page/' . $pageNum . '/" /><meta itemprop="name" content="Page ' . $pageNum . '" /><meta itemprop="position" content="3" /></span>';
+            } else {
+                echo '<span>/</span> ';
+                echo '<span class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">Blog<meta itemprop="item" content="' . get_post_type_archive_link('post') . '" /><meta itemprop="name" content="Blog" /><meta itemprop="position" content="2" /></span>';
+            }
+
+            echo '</div>';
+        }
+    }
+}
+
+function breadcrumbs_shortcode() {
+    ob_start();
+    breadcrumbs();
+    return ob_get_clean();
+}
+add_shortcode('breadcrumbs', 'breadcrumbs_shortcode');
+
