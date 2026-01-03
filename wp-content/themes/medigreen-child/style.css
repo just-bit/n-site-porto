@@ -449,7 +449,7 @@
 	line-height: 1.2;
 	padding-right: 10px;
 	padding-left: 10px;
-	height: 51px;
+	height: 41px;
 	font-weight: 600 !important;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -460,6 +460,12 @@
 	word-break: break-word;
 	hyphens: auto;
 }
+
+ @media screen and (max-width: 574px) {
+	 .slick-slider .bt_bb_single_product_title {
+		 height: 47px;
+	 }
+ }
 
 .slick-slider button.slick-arrow.slick-prev {
 	left: 8px;
@@ -955,13 +961,49 @@ td.actions p {
 
 .products li.product .btWooShopLoopItemInner .bt_bb_headline {
 	margin: 0 !important;
-	margin-bottom: 10px !important;
-	min-height: 36px;
+	margin-bottom: 5px !important;
+	width: calc(100% + 30px);
+	margin-left: -15px !important;
 }
 
+.bt_bb_single_product_title a,
+.bt_bb_size_extrasmall.bt_bb_headline h2 a {
+	display: block;
+	text-align: center;
+	height: 42px;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.bt_bb_single_product_title a {
+	height: 41px;
+}
+
+.bt_bb_single_product_title a,
 .bt_bb_headline .bt_bb_headline_content a {
-	font-size: 18px;
+	font-size: 16px !important;
 	font-weight: 600;
+}
+
+.bt_bb_single_product .bt_bb_single_product_image a img {
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 1/1;
+}
+
+@media screen and (max-width: 574px) {
+	.bt_bb_single_product_title a {
+		-webkit-line-clamp: 3 !important;
+		height: 55px !important;
+		font-size: 14px !important;
+	}
+
+	.bt_bb_headline .bt_bb_headline_content a {
+		font-size: 14px;
+	}
 }
 
 ul.products li.product .btWooShopLoopItemInner .bt_bb_image {
@@ -1072,8 +1114,20 @@ li.product.outofstock {
 	}
 }
 
+ul.products li.product .btWooShopLoopItemInner {
+	padding: 0 2em 15px !important;
+}
+
+ul.products li.product .btWooShopLoopItemInner a.button {
+	width: 100%;
+	max-width: 150px;
+	margin: 0 auto;
+	font-size: 14px !important;
+	padding: 10px;
+}
+
 div.outofstock .bt_bb_single_product_image,
-div.outofstock .bt_bb_single_product_content{
+div.outofstock .bt_bb_single_product_content {
 	opacity: 0.5;
 }
 
