@@ -1907,6 +1907,20 @@ body.woocommerce-checkout form.checkout, .cart_totals {
 
 /* Page Contacts ^ */
 
+/* breadcrumbs */
+
+section:has(.breadcrumbs) {
+	p {
+		display: none;
+	}
+
+	.bt_bb_row_holder .bt_bb_column .bt_bb_column_content {
+		margin-top: 0 !important;
+	}
+}
+
+/* breadcrumbs ^ */
+
 
 
 
