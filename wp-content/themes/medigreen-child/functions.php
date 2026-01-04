@@ -547,7 +547,7 @@ function add_variation_prices_to_labels()
 function breadcrumbs()
 {
     $site_url = '/';
-    $home_name = 'Buy weed online';
+    $home_name = 'Home';
     $shop_name = 'Catalog';
 
     if (!is_front_page()) {
