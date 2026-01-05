@@ -69,6 +69,16 @@
 	}
 }
 
+body.single-product {
+	.btSecondaryMenuBar {
+		background-color: #fff !important;
+		box-shadow: 0 0 20px 0 rgba(0, 0, 0, .2);
+	}
+	.btSecondaryMenuBar .btSecondaryNav ul li a {
+		color: #181818;
+	}
+}
+
 body.btStickyHeaderOpen {
 	.btSecondaryMenuBar {
 		background-color: #fff !important;
@@ -191,8 +201,8 @@ body.btStickyHeaderOpen {
 
 /* Secondary Menu Bar */
 .btSecondaryMenuBar {
-	background: #1a3a5c;
-	padding: 15px 0;
+	/*background: #1a3a5c;*/
+	padding: 12px 0;
 }
 
 .btSecondaryMenuBar .port {
