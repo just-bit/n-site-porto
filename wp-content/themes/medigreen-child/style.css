@@ -2493,7 +2493,7 @@ body.single-product {
 
 .reviews-cards-wrapper .reviews-nav-prev.slick-disabled,
 .reviews-cards-wrapper .reviews-nav-next.slick-disabled {
-	opacity: 0.3;
+	opacity: 0;
 	cursor: default;
 }
 
@@ -2642,7 +2642,7 @@ body.single-product {
 }
 
 .reviews-cards-slider .slick-dots li.slick-active button {
-	background: #a855f7;
+	background: #004471;
 }
 
 @media screen and (max-width: 768px) {
@@ -2680,6 +2680,146 @@ body.single-product {
 
 #reviews #comments h4 {
 	display: none;
+}
+
+/* Review Form Styles */
+#review_form_wrapper {
+	max-width: 600px;
+	margin: 40px auto 0;
+	padding: 30px;
+	background: #f9f9f9;
+	border-radius: 15px;
+}
+
+#review_form_wrapper #reply-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #1e1b4b;
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+#review_form .comment-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+#review_form .comment-form p {
+	margin: 0;
+}
+
+#review_form .comment-form label {
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 8px;
+}
+
+#review_form .comment-form input[type="text"],
+#review_form .comment-form input[type="email"],
+#review_form .comment-form textarea {
+	width: 100%;
+	padding: 12px 16px;
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	font-size: 14px;
+	transition: border-color 0.3s ease;
+	background: #fff;
+}
+
+#review_form .comment-form input[type="text"]:focus,
+#review_form .comment-form input[type="email"]:focus,
+#review_form .comment-form textarea:focus {
+	border-color: #004471;
+	outline: none;
+}
+
+#review_form .comment-form textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+#review_form .comment-form-rating {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#review_form .comment-form-rating select {
+	display: none;
+}
+
+#review_form .comment-form .stars {
+	display: flex;
+	gap: 5px;
+}
+
+#review_form .comment-form .stars a {
+	font-size: 24px;
+	color: #ddd;
+	text-decoration: none;
+}
+
+#review_form .comment-form .stars a:hover,
+#review_form .comment-form .stars a.active {
+	color: #e9a84b;
+}
+
+#review_form .comment-form .stars.selected a.active {
+	color: #e9a84b;
+}
+
+#review_form .form-submit {
+	text-align: center;
+	margin-top: 10px;
+}
+
+#review_form .form-submit input[type="submit"] {
+	background: #1e1b4b;
+	color: #fff;
+	border: none;
+	padding: 14px 40px;
+	border-radius: 30px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+#review_form .form-submit input[type="submit"]:hover {
+	background: #004471;
+}
+
+#review_form .comment-form-cookies-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+#review_form .comment-form-cookies-consent input[type="checkbox"] {
+	margin-top: 3px;
+}
+
+#review_form .comment-form-cookies-consent label {
+	font-size: 13px;
+	font-weight: 400;
+	color: #666;
+	margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+	#review_form_wrapper {
+		padding: 20px;
+		margin: 30px 10px 0;
+	}
+
+	#review_form_wrapper #reply-title {
+		font-size: 18px;
+	}
 }
 
 .woocommerce-checkout .validate-required {
