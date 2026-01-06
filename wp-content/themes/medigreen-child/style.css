@@ -119,6 +119,16 @@ body.btStickyHeaderOpen {
 	padding-right: 20px;
 }
 
+.btSecondaryMenuBar{
+	background: transparent !important;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+.btSecondaryMenuBar .btSecondaryNav ul li a  {
+	text-transform: none;
+}
+
 @media (min-width: 1200px) {
 	.btMenuHorizontal .menuPort > nav > ul > li {
 		padding-right: 20px !important;
