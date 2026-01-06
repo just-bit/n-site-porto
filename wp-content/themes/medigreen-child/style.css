@@ -2551,6 +2551,20 @@ font-size: 26px!important;
 
 .reviews-cards-slider .slick-track {
 	display: flex;
+	padding-top: 5px;
+	padding-bottom: 2px;
+}
+
+.review-card-title {
+	margin-bottom: 5px;
+	font-weight: 600;
+	font-size: 13px;
+    line-height: 1.3;
+	color: #1e1b4b;
+}
+
+.reviews-cards-slider .slick-track > p {
+	display: none!important;
 }
 
 .reviews-cards-slider .slick-slide {
@@ -2627,6 +2641,7 @@ font-size: 26px!important;
 .review-stars {
 	display: flex;
 	gap: 3px;
+	align-items: center;
 }
 
 .review-stars .star {
@@ -2739,10 +2754,23 @@ font-size: 26px!important;
 	margin-bottom: 8px;
 }
 
+/* WP Customer Reviews Section */
+.wpcr-reviews-section {
+	padding: 60px 0;
+}
+
+.section-reviews .wpcr-reviews-section {
+	padding: 0;
+}
+
+.section-reviews .reviews-cards-wrapper {
+	margin-top: 10px;
+}
+
 /* Reviews Section Header */
 .reviews-section-header {
 	text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -2752,6 +2780,7 @@ font-size: 26px!important;
 @media screen and (max-width: 574px) {
 	.reviews-section-header {
 		flex-direction: column;
+		align-items: center;
 		gap: 0;
 		margin-bottom: 20px;
 	}
@@ -2782,6 +2811,15 @@ font-size: 26px!important;
 .reviews-summary .reviews-stars {
 	display: flex;
 	gap: 3px;
+}
+
+.reviews-summary .reviews-stars br{
+display: none;
+}
+
+.reviews-summary p{
+	margin: 0!important;
+	display: contents!important;
 }
 
 .reviews-summary .reviews-stars .star {
@@ -3091,6 +3129,30 @@ font-size: 26px!important;
 	}
 }
 
+.reviews-all-link{
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	letter-spacing: 0.5px;
+	padding: 10px 20px;
+	border-radius: 50px;
+	background: #004471;
+	color: #fff!important;
+	box-shadow: 0 0 0 6px rgba(26, 58, 92, 0.5), 0 0 0 3em #1a3a5c inset;
+	transition: box-shadow 0.3s ease;
+	&:hover{
+		box-shadow: 0 0 0 0 rgba(26, 58, 92, 0.5), 0 0 0 3em #1a3a5c inset;
+		color: #fff;
+	}
+}
+
+@media screen and (max-width: 574px) {
+	.reviews-all-link{
+		display: block;
+		margin-top: 20px;
+	}
+}
+
 .woocommerce-checkout .validate-required {
 	position: relative;
 }
@@ -3123,4 +3185,240 @@ font-size: 26px!important;
 }
 
 
+/* ===========================================
+   WP Customer Reviews - Grid Cards Style
+   =========================================== */
+
+.wpcr3_reviews_holder,
+.wpcr3_respond_1 .wpcr3_reviews_holder {
+	display: grid !important;
+	grid-template-columns: repeat(4, 1fr) !important;
+	gap: 20px !important;
+	margin-bottom: 30px !important;
+}
+
+.wpcr3_review_item {
+	border: 2px solid #004471;
+	border-radius: 10px;
+	padding: 3px;
+	height: 100%;
+}
+
+.wpcr3_review_item .wpcr3_item {
+	background: #fff;
+	border-radius: 8px;
+	padding: 10px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 220px;
+}
+
+.wpcr3_review_item .wpcr3_item > meta,
+.wpcr3_review_item .wpcr3_item > p:empty {
+	display: none;
+}
+
+.wpcr3_review_item .wpcr3_dotline {
+	display: none !important;
+}
+
+.wpcr3_review_item .wpcr3_review {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+/* Author - top */
+.wpcr3_review_item .wpcr3_review_author {
+position: relative;
+margin-bottom: 15px;
+	font-weight: 800;
+	font-size: 14px!important;
+	line-height: 1!important;
+	height: 14px!important;
+	text-transform: uppercase;
+	letter-spacing: 0.5px!important;
+	color: transparent;
+	font-style: normal!important;
+	display: block !important;
+	order: 1;
+	margin-bottom: 15px;
+}
+
+.wpcr3_review_item .wpcr3_review_author .wpcr3_caps {
+	position: absolute;
+	left: 0;
+	display: inline;
+	color: #1e1b4b;
+}
+
+.wpcr3_review_item .wpcr3_review_author {
+	font-size: 0;
+	line-height: 1;
+}
+
+.wpcr3_review_item .wpcr3_review_author .wpcr3_caps {
+	font-size: 14px;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #1e1b4b;
+}
+
+/* Content - middle, flex grow */
+.wpcr3_review_item blockquote.wpcr3_content {
+	order: 2;
+	flex: 1;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #333;
+	margin: 0;
+	padding: 0 !important;
+	overflow-y: auto;
+	max-height: 100px;
+	margin-bottom: 15px;
+	scrollbar-width: thin;
+}
+
+div.wpcr3_review div.wpcr3_review_ratingValue {
+	top: -7px!important;
+}
+
+blockquote br{
+display: none!important;
+}
+
+blockquote:before{
+	content: none!important;
+	display: none!important;
+}
+
+.wpcr3_clear{
+	display: none!important;
+}
+
+.wpcr3_review_item blockquote.wpcr3_content p {
+	margin: 0;
+}
+
+/* Footer - stars left, date right */
+.wpcr3_review_item .wpcr3_review_ratingValue {
+	order: 10;
+	margin-top: auto;
+	padding-top: 10px;
+	border-top: 1px solid #eee;
+	display: flex !important;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.wpcr3_review_item .wpcr3_review_datePublished {
+	font-size: 12px!important;
+	font-weight: 600!important;
+	color: #666!important;
+	font-style: normal!important;
+	order: 11;
+	margin-top: -27px;
+	margin-left: auto;
+}
+
+/* Stars color - blue */
+.wpcr3_review_item .wpcr3_rating_style1_base {
+	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d1d1d1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>') repeat-x;
+	background-size: 17px 17px;
+	width: 85px;
+	height: 17px;
+}
+
+.wpcr3_review_item .wpcr3_rating_style1_average {
+	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23004471"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>') repeat-x;
+	background-size: 17px 17px;
+	height: 17px;
+}
+
+.wpcr3_review_item .wpcr3_clear {
+	display: none !important;
+}
+
+.wpcr3_review_item .wpcr3_hide {
+	display: none !important;
+}
+
+/* Pagination styling */
+.wpcr3_pagination {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.wpcr3_pagination p {
+	display: none;
+}
+
+.wpcr3_pagination .wpcr3_a {
+	background: #004471;
+	border-radius: 5px;
+	padding: 8px 14px;
+}
+
+.wpcr3_pagination .wpcr3_a:hover {
+	background: #00619e;
+}
+
+.wpcr3_pagination .wpcr3_a.wpcr3_current {
+	background: #00619e;
+}
+
+.wpcr3_pagination .wpcr3_a.wpcr3_disabled {
+	background: #ccc;
+	cursor: default;
+}
+
+/* Hide powered by */
+.wpcr3_power {
+	display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+	.wpcr3_reviews_holder, .wpcr3_respond_1 .wpcr3_reviews_holder {
+		grid-template-columns: repeat(3, 1fr)!important;
+	}
+}
+
+@media (max-width: 900px) {
+	.wpcr3_reviews_holder, .wpcr3_respond_1 .wpcr3_reviews_holder {
+		grid-template-columns: repeat(2, 1fr)!important;
+	}
+}
+
+@media (max-width: 600px) {
+	.wpcr3_reviews_holder, .wpcr3_respond_1 .wpcr3_reviews_holder {
+		grid-template-columns: 1fr!important;
+	}
+}
+
+.reviews-page-button{
+	display: block!important;
+	margin-bottom: 20px;
+}
+
+.reviews-page-head{
+
+	.wpcr3_dotline{
+		display: none!important;
+	}
+	.wpcr3_respond_3{
+		display: none!important;
+	}
+	.wpcr3_respond_1 .wpcr3_reviews_holder:not(.wpcr3_submit_btn){
+		display: none!important;
+	}
+	.wpcr3_button_1.wpcr3_cancel_btn{
+		display: none!important;
+	}
+}
 

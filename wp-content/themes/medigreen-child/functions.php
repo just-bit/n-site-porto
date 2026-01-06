@@ -767,3 +767,314 @@ function display_category_reviews_slider() {
     </script>
     <?php
 }
+
+// Fix wpautop for wpcr shortcode
+function wpcr_shortcode_fix( $content ) {
+    // Remove <p> tags around the shortcode
+    $content = preg_replace( '/<p>\s*(\[wpcr_reviews_slider[^\]]*\])\s*<\/p>/i', '$1', $content );
+    return $content;
+}
+add_filter( 'the_content', 'wpcr_shortcode_fix', 9 );
+
+// Display WP Customer Reviews in slider format
+function display_wpcr_reviews_slider( $atts = array() ) {
+    // Remove wpautop temporarily
+    remove_filter( 'the_content', 'wpautop' );
+    
+    $atts = shortcode_atts( array(
+        'limit' => 50,
+        'title' => __( 'Customer Reviews', 'medigreen' ),
+    ), $atts );
+
+    // Get reviews from WP Customer Reviews plugin
+    $reviews = get_posts( array(
+        'post_type'      => 'wpcr3_review',
+        'post_status'    => 'publish',
+        'posts_per_page' => intval( $atts['limit'] ),
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) );
+
+    if ( empty( $reviews ) ) {
+        return '';
+    }
+
+    // Calculate average rating
+    $total_rating = 0;
+    $rating_count = 0;
+    foreach ( $reviews as $review ) {
+        $rating = intval( get_post_meta( $review->ID, 'wpcr3_review_rating', true ) );
+        if ( $rating > 0 ) {
+            $total_rating += $rating;
+            $rating_count++;
+        }
+    }
+    $average_rating = $rating_count > 0 ? $total_rating / $rating_count : 0;
+
+    ob_start();
+    ?>
+    <div id="wpcr-reviews">
+        <div class="reviews-section-header">
+            <div class="reviews-summary">
+                <div class="reviews-stars">
+                    <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+                        <span class="star <?php echo $i <= round( $average_rating ) ? 'filled' : ''; ?>"></span>
+                    <?php endfor; ?>
+                </div>
+                <span class="reviews-rating">(<?php echo number_format( $average_rating, 1 ); ?>)</span>
+                <span class="reviews-count"><?php printf( esc_html__( 'based on %s reviews', 'medigreen' ), count( $reviews ) ); ?></span>
+            </div>
+            <a href="<?php echo site_url('/reviews/'); ?>" class="reviews-all-link">All reviews</a>
+        </div>
+
+        <div class="reviews-cards-wrapper">
+            <button type="button" class="reviews-nav-prev wpcr-nav-prev" aria-label="Previous"></button>
+            <div class="reviews-cards-slider wpcr-slider">
+                <?php foreach ( $reviews as $review ) :
+                    $rating = intval( get_post_meta( $review->ID, 'wpcr3_review_rating', true ) );
+                    $author_name = get_post_meta( $review->ID, 'wpcr3_review_name', true );
+                    if ( empty( $author_name ) ) {
+                        $author_name = $review->post_title;
+                    }
+                    $review_title = get_post_meta( $review->ID, 'wpcr3_review_title', true );
+                    $review_text = $review->post_content;
+                    $review_date = get_the_date( 'M j, Y', $review->ID );
+                ?>
+                <div class="review-card">
+                    <div class="review-card-inner">
+                        <div class="review-card-header">
+                            <span class="review-author"><?php echo esc_html( $author_name ); ?></span>
+                        </div>
+                        <?php if ( ! empty( $review_title ) ) : ?>
+                        <div class="review-card-title"><?php echo esc_html( $review_title ); ?></div>
+                        <?php endif; ?>
+                        <div class="review-card-content">
+                            <?php echo wp_kses_post( nl2br( $review_text ) ); ?>
+                        </div>
+                        <div class="review-card-footer">
+                            <?php if ( $rating > 0 ) : ?>
+                            <div class="review-stars">
+                                <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+                                    <span class="star <?php echo $i <= $rating ? 'filled' : ''; ?>"></span>
+                                <?php endfor; ?>
+                            </div>
+                            <?php endif; ?>
+                            <span class="review-date"><?php echo esc_html( $review_date ); ?></span>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <button type="button" class="reviews-nav-next wpcr-nav-next" aria-label="Next"></button>
+        </div>
+    </div>
+
+<?php
+    $output = ob_get_clean();
+    
+    // Remove empty p tags and restore wpautop
+    $output = preg_replace( '/<p>\s*<\/p>/', '', $output );
+    $output = preg_replace( '/<p><\/p>/', '', $output );
+    $output = str_replace( array( '<p>', '</p>' ), '', $output );
+    
+    // Restore wpautop
+    add_filter( 'the_content', 'wpautop' );
+    
+    // Add inline script to footer
+    if ( ! has_action( 'wp_footer', 'wpcr_slider_inline_script' ) ) {
+        add_action( 'wp_footer', 'wpcr_slider_inline_script', 99 );
+    }
+    
+    return $output;
+}
+
+function wpcr_slider_inline_script() {
+    ?>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <script>
+    (function($) {
+        function initWpcrSlider() {
+            var $slider = $('#wpcr-reviews .wpcr-slider');
+            var $prevBtn = $('#wpcr-reviews .wpcr-nav-prev');
+            var $nextBtn = $('#wpcr-reviews .wpcr-nav-next');
+            
+            // Remove empty p tags before init
+            $slider.children('p').each(function() {
+                if ($(this).find('.review-card').length) {
+                    $(this).replaceWith($(this).contents());
+                } else if ($.trim($(this).text()) === '') {
+                    $(this).remove();
+                }
+            });
+            $slider.children('br').remove();
+            
+            if ($slider.length && !$slider.hasClass('slick-initialized') && typeof $.fn.slick !== 'undefined') {
+                $slider.slick({
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    arrows: false,
+                    dots: false,
+                    responsive: [
+                        {
+                            breakpoint: 1200,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 576,
+                            settings: {
+                                slidesToShow: 1,
+                                dots: true
+                            }
+                        }
+                    ]
+                });
+                
+                $prevBtn.on('click', function() {
+                    $slider.slick('slickPrev');
+                });
+                
+                $nextBtn.on('click', function() {
+                    $slider.slick('slickNext');
+                });
+                
+                function updateButtons() {
+                    var currentSlide = $slider.slick('slickCurrentSlide');
+                    var slideCount = $slider.slick('getSlick').slideCount;
+                    var slidesToShow = $slider.slick('getSlick').options.slidesToShow;
+                    
+                    $prevBtn.toggleClass('slick-disabled', currentSlide === 0);
+                    $nextBtn.toggleClass('slick-disabled', currentSlide >= slideCount - slidesToShow);
+                }
+                
+                $slider.on('afterChange', updateButtons);
+                updateButtons();
+            }
+        }
+        
+        $(document).ready(function() {
+            setTimeout(initWpcrSlider, 100);
+        });
+        
+        $(window).on('load', function() {
+            initWpcrSlider();
+        });
+    })(jQuery);
+    </script>
+    <?php
+}
+add_shortcode( 'wpcr_reviews_slider', 'display_wpcr_reviews_slider' );
+
+// Fix WPCR3 AJAX pagination nesting bug
+add_action('wp_footer', 'fix_wpcr3_ajax_pagination', 999);
+function fix_wpcr3_ajax_pagination() {
+    ?>
+    <script>
+    jQuery(function($) {
+        // Override pagination click handler
+        $(document).off('click', '.wpcr3_pagination .wpcr3_a');
+        $('.wpcr3_respond_1').off('click', '.wpcr3_pagination .wpcr3_a');
+        
+        $(document).on('click', '.wpcr3_pagination .wpcr3_a', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            
+            var t = $(this);
+            if (t.hasClass('wpcr3_disabled')) return false;
+            
+            var pager = t.closest('.wpcr3_pagination');
+            var parent = t.closest('.wpcr3_respond_1');
+            var reviews = parent.find('.wpcr3_reviews_holder').first();
+            var page = t.attr('data-page');
+            var pageOpts = pager.attr('data-page-opts');
+            var on_postid = parent.attr('data-on-postid');
+            
+            var ajaxData = { ajaxAct2: 'pager', on_postid: on_postid, page: page, pageOpts: pageOpts };
+            
+            wpcr3.ajaxPost(parent, ajaxData, function(err, rtn) {
+                if (err) return;
+                
+                // Parse response and extract only reviews and pagination
+                var $response = $('<div>').html(rtn.output);
+                var $newReviews = $response.find('.wpcr3_review_item');
+                var $newPagination = $response.find('.wpcr3_pagination').last();
+                
+                // If no review items found, try getting from reviews_holder
+                if ($newReviews.length === 0) {
+                    var $holder = $response.find('.wpcr3_reviews_holder').last();
+                    if ($holder.length) {
+                        $newReviews = $holder.children('.wpcr3_review_item');
+                    }
+                }
+                
+                // Update reviews
+                if ($newReviews.length > 0) {
+                    reviews.empty().append($newReviews.clone());
+                } else {
+                    // Fallback: get innermost reviews_holder content
+                    var $innerHolder = $response.find('.wpcr3_reviews_holder').last();
+                    if ($innerHolder.length) {
+                        reviews.html($innerHolder.html());
+                    }
+                }
+                
+                // Update pagination
+                if ($newPagination.length) {
+                    pager.replaceWith($newPagination.clone());
+                }
+                
+                $('html,body').animate({
+                    scrollTop: reviews.offset().top - 100
+                });
+            });
+            
+            return false;
+        });
+    });
+
+    jQuery(document).on('ready ajaxComplete', function() {
+        jQuery('.wpcr3_review_date').each(function() {
+            var text = jQuery(this).text().trim();
+            if (text.indexOf(',') > -1) {
+                var date = new Date(text);
+                if (!isNaN(date.getTime())) {
+                    var d = ("0" + date.getDate()).slice(-2);
+                    var m = ("0" + (date.getMonth() + 1)).slice(-2);
+                    var y = date.getFullYear();
+                    jQuery(this).text(d + '.' + m + '.' + y);
+                }
+            }
+        });
+    });
+    
+    // Toggle WPCR3 review form by #review-form button
+    jQuery(document).on('click', '#review-form, [href="#review-form"], [data-mfp-src="#reviews-popup"]', function(e) {
+        e.preventDefault();
+        var $form = jQuery('.wpcr3_respond_2');
+        if ($form.length) {
+            $form.slideToggle(400, function() {
+                if ($form.is(':visible')) {
+                    jQuery('html, body').animate({
+                        scrollTop: $form.offset().top - 100
+                    }, 400);
+                }
+            });
+        }
+        return false;
+    });
+    </script>
+    <?php
+}
+
+add_filter('wpcr3_format_date', function($date, $timestamp) {
+    return date('d.m.Y', $timestamp);
+}, 10, 2);

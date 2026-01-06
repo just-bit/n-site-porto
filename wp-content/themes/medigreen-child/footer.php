@@ -83,6 +83,7 @@ if ( boldthemes_get_option( 'footer_dark_skin' ) ) {
 		</div><!-- /port -->
 	</section>
 <?php } ?>
+
 </footer>
 </div><!-- /btSiteFooter -->
 
