@@ -34,14 +34,23 @@ add_action( 'comment_form_after', 'boldthemes_comment_form_after' );
 ?>
 <div id="reviews">
 	<div id="comments" class="bt-comments-box">
-		<h4><?php
-			if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' && ( $count = $product->get_review_count() ) )
-				printf( _n( '%s review for %s', '%s reviews for %s', $count, 'medigreen' ), $count, get_the_title() );
-			else
-				_e( 'Reviews', 'medigreen' );
-		?></h4>
+		<?php if ( have_comments() ) : 
+			$average_rating = $product->get_average_rating();
+			$review_count = $product->get_review_count();
+		?>
 
-		<?php if ( have_comments() ) : ?>
+			<div class="reviews-section-header">
+				<h2 class="reviews-title"><?php esc_html_e( 'Customer Reviews', 'medigreen' ); ?></h2>
+				<div class="reviews-summary">
+					<div class="reviews-stars">
+						<?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+							<span class="star <?php echo $i <= round( $average_rating ) ? 'filled' : ''; ?>"></span>
+						<?php endfor; ?>
+					</div>
+					<span class="reviews-rating">(<?php echo number_format( $average_rating, 1 ); ?>)</span>
+					<span class="reviews-count"><?php printf( esc_html__( 'based on %s reviews', 'medigreen' ), $review_count ); ?></span>
+				</div>
+			</div>
 
 			<div class="reviews-cards-wrapper">
 				<button type="button" class="reviews-nav-prev" aria-label="Previous"></button>
