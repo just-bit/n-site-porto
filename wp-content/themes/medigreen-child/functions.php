@@ -596,3 +596,174 @@ function remove_additional_tab( $tabs ) {
 
 // Remove meta from product page
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+
+// Display category reviews in catalog
+function display_category_reviews_slider() {
+
+    // Get current category
+    $category = get_queried_object();
+    
+    // Get product IDs from current category
+    if ( is_product_category() ) {
+        $product_ids = get_posts( array(
+            'post_type'      => 'product',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'term_id',
+                    'terms'    => $category->term_id,
+                ),
+            ),
+        ) );
+    } else {
+        // Shop page - get all products
+        $product_ids = get_posts( array(
+            'post_type'      => 'product',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        ) );
+    }
+
+    if ( empty( $product_ids ) ) {
+        return;
+    }
+
+    // Get reviews for these products
+    $reviews = get_comments( array(
+        'post__in'   => $product_ids,
+        'status'     => 'approve',
+        'type'       => 'review',
+        'number'     => 50,
+        'orderby'    => 'comment_date',
+        'order'      => 'DESC',
+    ) );
+
+    if ( empty( $reviews ) ) {
+        return;
+    }
+
+    // Calculate average rating
+    $total_rating = 0;
+    $rating_count = 0;
+    foreach ( $reviews as $review ) {
+        $rating = intval( get_comment_meta( $review->comment_ID, 'rating', true ) );
+        if ( $rating > 0 ) {
+            $total_rating += $rating;
+            $rating_count++;
+        }
+    }
+    $average_rating = $rating_count > 0 ? $total_rating / $rating_count : 0;
+    ?>
+
+    <div id="category-reviews" class="category-reviews-section">
+        <div class="reviews-section-header">
+            <h2 class="reviews-title"><?php esc_html_e( 'Customer Reviews', 'medigreen' ); ?></h2>
+            <div class="reviews-summary">
+                <div class="reviews-stars">
+                    <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+                        <span class="star <?php echo $i <= round( $average_rating ) ? 'filled' : ''; ?>"></span>
+                    <?php endfor; ?>
+                </div>
+                <span class="reviews-rating">(<?php echo number_format( $average_rating, 1 ); ?>)</span>
+                <span class="reviews-count"><?php printf( esc_html__( 'based on %s reviews', 'medigreen' ), count( $reviews ) ); ?></span>
+            </div>
+        </div>
+
+        <div class="reviews-cards-wrapper">
+            <button type="button" class="reviews-nav-prev" aria-label="Previous"></button>
+            <div class="reviews-cards-slider category-reviews-slider">
+                <?php foreach ( $reviews as $review ) :
+                    $rating = intval( get_comment_meta( $review->comment_ID, 'rating', true ) );
+                    $product_name = get_the_title( $review->comment_post_ID );
+                    $product_url = get_permalink( $review->comment_post_ID );
+                ?>
+                <div class="review-card">
+                    <div class="review-card-inner">
+                        <div class="review-card-header">
+                            <span class="review-author"><?php echo esc_html( $review->comment_author ); ?></span>
+                        </div>
+                        <a href="<?php echo esc_url( $product_url ); ?>" class="review-card-product"><?php echo esc_html( $product_name ); ?></a>
+                        <div class="review-card-content">
+                            <?php echo wpautop( $review->comment_content ); ?>
+                        </div>
+                        <div class="review-card-footer">
+                            <?php if ( $rating > 0 ) : ?>
+                            <div class="review-stars">
+                                <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+                                    <span class="star <?php echo $i <= $rating ? 'filled' : ''; ?>"></span>
+                                <?php endfor; ?>
+                            </div>
+                            <?php endif; ?>
+                            <span class="review-date"><?php echo date_i18n( 'd.m.Y', strtotime( $review->comment_date ) ); ?></span>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <button type="button" class="reviews-nav-next" aria-label="Next"></button>
+        </div>
+    </div>
+
+    <script>
+    jQuery(document).ready(function($) {
+        var $slider = $('.category-reviews-slider');
+        var $wrapper = $slider.closest('.reviews-cards-wrapper');
+        var $prevBtn = $wrapper.find('.reviews-nav-prev');
+        var $nextBtn = $wrapper.find('.reviews-nav-next');
+        
+        if ($slider.length && !$slider.hasClass('slick-initialized')) {
+            $slider.slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                infinite: false,
+                arrows: false,
+                dots: false,
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1,
+                            dots: true
+                        }
+                    }
+                ]
+            });
+            
+            $prevBtn.on('click', function() {
+                $slider.slick('slickPrev');
+            });
+            
+            $nextBtn.on('click', function() {
+                $slider.slick('slickNext');
+            });
+            
+            function updateButtons() {
+                var currentSlide = $slider.slick('slickCurrentSlide');
+                var slideCount = $slider.slick('getSlick').slideCount;
+                var slidesToShow = $slider.slick('getSlick').options.slidesToShow;
+                
+                $prevBtn.toggleClass('slick-disabled', currentSlide === 0);
+                $nextBtn.toggleClass('slick-disabled', currentSlide >= slideCount - slidesToShow);
+            }
+            
+            $slider.on('afterChange', updateButtons);
+            updateButtons();
+        }
+    });
+    </script>
+    <?php
+}

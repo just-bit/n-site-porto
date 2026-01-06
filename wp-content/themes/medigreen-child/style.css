@@ -1313,6 +1313,7 @@ td.actions p {
 
 /* catalog */
 
+
 .btSidebarLeft.btWithSidebar .btContentHolder .btSidebar {
 	padding-top: 2px !important;
 }
@@ -2554,7 +2555,7 @@ font-size: 26px!important;
 
 .reviews-cards-slider .slick-slide {
 	margin: 0 5px;
-	padding: 10px;
+	padding: 5px;
 	height: auto;
 }
 
@@ -2580,7 +2581,7 @@ font-size: 26px!important;
 }
 
 .review-card-header {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .review-author {
@@ -2593,7 +2594,8 @@ font-size: 26px!important;
 
 .review-card-product {
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 13px;
+    line-height: 1.3;
 	color: #1e1b4b;
 	margin-bottom: 10px;
 }
@@ -2717,10 +2719,30 @@ font-size: 26px!important;
 	display: none;
 }
 
+/* Category Reviews Section */
+.category-reviews-before-footer {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 30px;
+}
+
+.category-reviews-section {
+	padding-bottom: 60px;
+}
+
+.category-reviews-section .review-card-product {
+	font-weight: 600;
+	font-size: 13px;
+    line-height: 1.3;
+	color: #004471;
+	margin-bottom: 8px;
+}
+
 /* Reviews Section Header */
 .reviews-section-header {
 	text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     display: flex;
     align-items: baseline;
     justify-content: space-between;

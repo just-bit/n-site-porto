@@ -1,13 +1,22 @@
-		</div><!-- /boldthemes_content -->
+	</div><!-- /boldthemes_content -->
 <?php
 
 if ( BoldThemesFramework::$has_sidebar ) {
-	include( get_theme_file_path( 'sidebar.php' ) );					
+	include( get_parent_theme_file_path( 'sidebar.php' ) );					
 }
 
 ?> 
 	</div><!-- /contentHolder -->
 </div><!-- /contentWrap -->
+
+<?php
+// Display category reviews before footer
+if ( function_exists( 'display_category_reviews_slider' ) && ( is_product_category() || is_shop() ) ) {
+	echo '<div class="category-reviews-before-footer">';
+	display_category_reviews_slider();
+	echo '</div>';
+}
+?>
 
 <div class="btSiteFooter">
 
