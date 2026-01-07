@@ -1078,3 +1078,54 @@ function fix_wpcr3_ajax_pagination() {
 add_filter('wpcr3_format_date', function($date, $timestamp) {
     return date('d.m.Y', $timestamp);
 }, 10, 2);
+
+// Shortcode for WPCR rating stars
+function wpcr_rating_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'text' => 'based on %s reviews',
+    ), $atts);
+
+    // Get all published reviews
+    $reviews = get_posts(array(
+        'post_type'      => 'wpcr3_review',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'fields'         => 'ids',
+    ));
+
+    if (empty($reviews)) {
+        return '';
+    }
+
+    // Calculate average rating
+    $total_rating = 0;
+    $rating_count = 0;
+    foreach ($reviews as $review_id) {
+        $rating = intval(get_post_meta($review_id, 'wpcr3_review_rating', true));
+        if ($rating > 0) {
+            $total_rating += $rating;
+            $rating_count++;
+        }
+    }
+
+    if ($rating_count === 0) {
+        return '';
+    }
+
+    $average_rating = round($total_rating / $rating_count);
+    $reviews_count = count($reviews);
+
+    ob_start();
+    ?>
+    <div class="rating-stars-wrapper">
+        <div class="rating-stars">
+            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                <span class="rating-star <?php echo $i <= $average_rating ? 'active' : ''; ?>"></span>
+            <?php endfor; ?>
+        </div>
+        <div><span style="font-weight: 600; margin-right: 5px;">(<?php echo $average_rating; ?>)</span> <?php printf(esc_html($atts['text']), $reviews_count); ?></div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('wpcr_rating', 'wpcr_rating_shortcode');
