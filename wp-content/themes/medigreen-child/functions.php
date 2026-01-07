@@ -1129,3 +1129,39 @@ function wpcr_rating_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('wpcr_rating', 'wpcr_rating_shortcode');
+
+// Create Strain Taxonomy
+add_action( 'init', 'create_strain_taxonomy' );
+function create_strain_taxonomy() {
+    $args = array(
+        'labels' => [
+            'name' => 'Strains',
+            'singular_name' => 'Strain',
+            'search_items' => 'Search Strains',
+            'all_items' => 'All Strains',
+            'edit_item' => 'Edit Strain',
+            'update_item' => 'Update Strain',
+            'add_new_item' => 'Add New Strain',
+            'new_item_name' => 'New Strain Name',
+            'menu_name' => 'Strains',
+        ],
+        'public' => true,
+        'show_in_rest' => true,
+        'hierarchical' => true,
+        'rewrite' => [ 'slug' => 'strains' ],
+    );
+
+    register_taxonomy( 'strain', 'product', $args);
+}
+
+add_action( 'pre_get_posts', 'canna_pre_get_strains');
+
+function canna_pre_get_strains($query){
+    if( !is_admin()) {
+        if ($query->is_main_query() && $query->is_tax('strain')) {
+            $query->set('posts_per_page', 16);
+        }
+    }
+}
+
+add_filter('xmlrpc_enabled', '__return_false');
