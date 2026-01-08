@@ -3733,6 +3733,12 @@ blockquote:before {
 	flex-wrap: wrap;
 }
 
+@media screen and (max-width: 574px) {
+	.strain-single__info {
+		gap: 25px;
+	}
+}
+
 .strain-single__image {
 	flex: 0 0 300px;
 	max-width: 300px;
@@ -3740,13 +3746,19 @@ blockquote:before {
 
 .strain-single__image img {
 	width: 100%;
-	height: auto;
-	border-radius: 8px;
+	height: 100%;
+	object-fit: contain;
+	max-height: 210px;
+}
+
+@media screen and (max-width: 574px) {
+	.strain-single__image img {
+		width: 200px;
+	}
 }
 
 .strain-single__details {
 	flex: 1;
-	min-width: 300px;
 }
 
 .strain-single__meta {
@@ -3779,7 +3791,6 @@ blockquote:before {
 
 .strain-single__scales {
 	margin-top: 25px;
-	max-width: 400px;
 }
 
 .strain-single__scale {
@@ -3826,6 +3837,13 @@ blockquote:before {
 	margin: 0 0 30px;
 }
 
+@media screen and (max-width: 574px) {
+	.strain-products__title,
+	.strain-similar__title {
+		text-align: center;
+	}
+}
+
 .strain-products__grid,
 .strain-similar__grid {
 	display: grid;
@@ -3834,6 +3852,12 @@ blockquote:before {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
+
+	.bt_bb_image img {
+		width: 100%;
+		margin: 0 auto;
+		aspect-ratio: 1;
+	}
 
 	.price {
 		display: flex;
@@ -3893,6 +3917,8 @@ blockquote:before {
 	}
 
 	.strain-single__image {
+		display: flex;
+		justify-content: center;
 		flex: 0 0 auto;
 		max-width: 100%;
 	}
@@ -3922,11 +3948,11 @@ blockquote:before {
 	margin-bottom: 100px;
 }
 
- @media screen and (max-width: 574px) {
-	 .single-strain-container {
-		 margin-bottom: 60px;
-	 }
- }
+@media screen and (max-width: 574px) {
+	.single-strain-container {
+		margin-bottom: 60px;
+	}
+}
 
 /* hide sidebar on strain */
 .tax-strain .btSidebar,
