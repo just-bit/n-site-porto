@@ -55,18 +55,15 @@ $thc_val = $thcpercentage && isset($thcpercentage[0]) && is_object($thcpercentag
 		</div>
 	</section>
 
-	<div class="container">
+	<div class="container single-strain-container">
 		<?php if (function_exists('breadcrumbs')) breadcrumbs(); ?>
 
-
 	<div class="strain-single">
-		<div class="container">
 			<?php if ($strain->description): ?>
 				<div class="strain-single__description">
 					<?= wpautop(esc_html($strain->description)) ?>
 				</div>
 			<?php endif; ?>
-
 			<div class="strain-single__content">
 				<div class="strain-single__info">
 					<?php if ($image): ?>
@@ -161,7 +158,6 @@ $thc_val = $thcpercentage && isset($thcpercentage[0]) && is_object($thcpercentag
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 
 	<?php
@@ -169,36 +165,15 @@ $thc_val = $thcpercentage && isset($thcpercentage[0]) && is_object($thcpercentag
 	if (have_posts()):
 		?>
 		<div class="strain-products">
-			<div class="container">
 				<h2 class="strain-products__title"><?= esc_html($strain->name) ?> Products</h2>
-				<div class="strain-products__grid">
+				<ul class="strain-products__grid">
 					<?php
 					while (have_posts()): the_post();
 						wc_get_template_part('content', 'product');
 					endwhile;
 					?>
-				</div>
+				</ul>
 				<?php woocommerce_pagination(); ?>
-			</div>
-		</div>
-	<?php endif; ?>
-
-	<?php if (!empty($similar)): ?>
-		<div class="strain-similar">
-			<div class="container">
-				<h2 class="strain-similar__title">Similar Products</h2>
-				<div class="strain-similar__grid">
-					<?php
-					foreach ($similar as $product_id):
-						global $product;
-						$product = wc_get_product($product_id);
-						if ($product):
-							wc_get_template_part('content', 'product');
-						endif;
-					endforeach;
-					?>
-				</div>
-			</div>
 		</div>
 	<?php endif; ?>
     </div>

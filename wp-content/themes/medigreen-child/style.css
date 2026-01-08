@@ -3560,7 +3560,7 @@ blockquote:before {
 }
 
 .strain-card:hover {
-	border-color: #6E1F8C;
+	border-color: #1a3a5c;
 	box-shadow: 0 5px 20px rgba(110, 31, 140, 0.15);
 }
 
@@ -3587,7 +3587,7 @@ blockquote:before {
 
 .strain-card__title {
 	font-size: 16px;
-	font-weight: 600!important;
+	font-weight: 600 !important;
 	margin: 0;
 	color: #1a3a5c;
 	display: flex;
@@ -3602,7 +3602,7 @@ blockquote:before {
 
 .strain-card__arrow {
 	flex-shrink: 0;
-	color: #6E1F8C;
+	color: #1a3a5c;
 	opacity: 0.6;
 	transition: opacity 0.3s;
 }
@@ -3650,7 +3650,7 @@ blockquote:before {
 }
 
 .strain-card__meta strong {
-	color: #6E1F8C;
+	color: #1a3a5c;
 }
 
 .strain-card__scales {
@@ -3669,7 +3669,7 @@ blockquote:before {
 	display: flex;
 	justify-content: space-between;
 	font-size: 11px;
-	color: #6E1F8C;
+	color: #1a3a5c;
 	margin-bottom: 0;
 }
 
@@ -3683,7 +3683,7 @@ blockquote:before {
 .strain-card__scale-bar span {
 	display: block;
 	height: 100%;
-	background: #6E1F8C;
+	background: #1a3a5c;
 	border-radius: 2px;
 }
 
@@ -3699,7 +3699,7 @@ blockquote:before {
 .strain-single__title {
 	font-size: 36px;
 	font-weight: 700;
-	color: #6E1F8C;
+	color: #1a3a5c;
 	margin: 0 0 15px;
 }
 
@@ -3717,8 +3717,14 @@ blockquote:before {
 .strain-single__content {
 	background: #fff;
 	border-radius: 12px;
-	box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+	border: 1px solid #ccc;
 	padding: 30px;
+}
+
+@media screen and (max-width: 574px) {
+	.strain-single__content {
+		padding: 20px;
+	}
 }
 
 .strain-single__info {
@@ -3768,7 +3774,7 @@ blockquote:before {
 }
 
 .strain-single__meta strong {
-	color: #6E1F8C;
+	color: #1a3a5c;
 }
 
 .strain-single__scales {
@@ -3802,14 +3808,14 @@ blockquote:before {
 .strain-single__scale-bar span {
 	display: block;
 	height: 100%;
-	background: linear-gradient(90deg, #7cb342, #6E1F8C);
+	background: #1a3a5c;
 	border-radius: 4px;
 }
 
 /* Strain Products */
 .strain-products {
-	padding: 50px 0;
-	background: #f9f9f9;
+	padding-top: 30px;
+
 }
 
 .strain-products__title,
@@ -3824,7 +3830,49 @@ blockquote:before {
 .strain-similar__grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 20px;
+	gap: 45px 20px;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+	.price {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 15px;
+
+		ins {
+			text-decoration: none;
+			font-weight: 700 !important;
+		}
+
+		bdi {
+			font-weight: 700 !important;
+		}
+
+		del {
+			opacity: .5;
+			margin: 0 5px 0 0;
+			font-weight: 700 !important;
+		}
+
+		.price-from {
+			margin-right: 6px;
+			font-weight: 700 !important;
+		}
+	}
+
+	.bt_bb_image.bt_bb_content_exists {
+		margin-bottom: 15px;
+	}
+
+	.button {
+		display: block !important;
+		text-align: center !important;
+		max-width: 160px !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+		font-size: 14px !important;
+	}
 }
 
 /* Strain Similar Products */
@@ -3870,7 +3918,17 @@ blockquote:before {
 	}
 }
 
-/* Скрыть сайдбар на страницах таксономии strain */
+.single-strain-container {
+	margin-bottom: 100px;
+}
+
+ @media screen and (max-width: 574px) {
+	 .single-strain-container {
+		 margin-bottom: 60px;
+	 }
+ }
+
+/* hide sidebar on strain */
 .tax-strain .btSidebar,
 .tax-strain aside.btSidebar {
 	display: none !important;
