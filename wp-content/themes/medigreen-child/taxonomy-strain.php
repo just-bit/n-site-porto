@@ -167,7 +167,7 @@ $thc_val = $thcpercentage && isset($thcpercentage[0]) && is_object($thcpercentag
 	if (have_posts()):
 		// Setup WooCommerce loop properties for pagination
 		wc_setup_loop(array(
-			'columns'      => wc_get_default_products_per_row(),
+			'columns'      => 4,
 			'name'         => 'strain-products',
 			'is_shortcode' => false,
 			'is_search'    => false,
