@@ -1329,7 +1329,6 @@ td.actions p {
 
 /* catalog */
 
-/*
 body.post-type-archive-product,
 body.tax-product {
 	section:has(h1) {
@@ -1353,7 +1352,7 @@ body.tax-product {
 	body.post-type-archive-product,
 	body.tax-product {
 		.btContentHolder {
-			padding: 50px 30px 20px;
+			padding: 60px 30px 20px;
 		}
 	}
 }
@@ -1363,8 +1362,8 @@ body.tax-product {
 	body.tax-product {
 		section:has(h1) {
 			.bt_bb_port {
-				padding-top: 80px !important;
-				padding-bottom: 40px !important;
+				padding-top: 55px !important;
+				padding-bottom: 0 !important;
 			}
 
 			.bt_bb_size_extralarge.bt_bb_headline h1 {
@@ -1378,8 +1377,6 @@ body.tax-product {
 		}
 	}
 }
-*/
-
 
 .btSidebarLeft.btWithSidebar .btContentHolder .btSidebar {
 	padding-top: 2px !important;
@@ -1751,10 +1748,28 @@ body.mobile-filters-open .btSidebar-overlay {
 	.btSidebar-toggle {
 		position: absolute;
 		left: 30px;
-		top: 50px;
+		top: 17px;
 		max-width: 150px;
 	}
 }
+
+@media screen and (max-width: 1199px) {
+	.btContentHolder.btContentHolder-mobile {
+		.btSidebar-toggle {
+			top: 56px;
+		}
+	}
+}
+
+ @media screen and (max-width: 574px) {
+	 @media screen and (max-width: 1199px) {
+		 .btContentHolder.btContentHolder-mobile {
+			 .btSidebar-toggle {
+				 top: 54px;
+			 }
+		 }
+	 }
+ }
 
 /* blog */
 
