@@ -212,8 +212,11 @@ body.btStickyHeaderOpen {
 	}
 }
 
-
 @media screen and (max-width: 1199px) {
+
+	.btSecondaryMenuBar{
+		position: static;
+	}
 	.menuPort nav ul a {
 		font-size: 16px;
 	}
@@ -337,7 +340,7 @@ body.btStickyHeaderOpen {
 
 	.btSecondaryMenuBar,
 	.mainHeader.btClear {
-		background-color: #004471 !important;
+		/*background-color: #004471 !important;*/
 	}
 
 	.btVerticalHeaderTop_mob .btButtonWidgetText {
