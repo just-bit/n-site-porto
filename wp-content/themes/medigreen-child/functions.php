@@ -1514,3 +1514,21 @@ function strain_products_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('strain_products', 'strain_products_shortcode');
+
+
+// strain header widgets disable
+add_filter('sidebars_widgets', 'strain_disable_sidebar_widgets', 10, 1);
+function strain_disable_sidebar_widgets($sidebars_widgets) {
+    if (is_tax('strain')) {
+     
+        $header_sidebars = array('header_left_widgets', 'header_right_widgets', 'header_menu_widgets', 'header_logo_widgets');
+        foreach ($sidebars_widgets as $sidebar_id => $widgets) {
+            if (!in_array($sidebar_id, $header_sidebars)) {
+                $sidebars_widgets[$sidebar_id] = false; // Отключаем сайдбары контента
+            }
+        }
+    }
+    return $sidebars_widgets;
+}
+
+remove_filter('is_active_sidebar', 'strain_disable_sidebar', 10);
