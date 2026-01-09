@@ -1400,6 +1400,15 @@ body.tax-product_cat {
 		.woocommerce-result-count {
 			margin-bottom: 0 !important;
 		}
+
+		.woocommerce-result-count,
+		.woocommerce-ordering {
+			margin-bottom: 10px !important;
+		}
+
+		form.woocommerce-ordering {
+			margin-top: -7px;
+		}
 	}
 
 	body.tax-product_cat {
@@ -1417,6 +1426,11 @@ body.tax-product_cat {
 
 		.woocommerce-result-count {
 			margin-bottom: 0 !important;
+		}
+
+		.woocommerce-result-count,
+		.woocommerce-ordering {
+			margin-bottom: 5px !important;
 		}
 	}
 }
@@ -1492,8 +1506,11 @@ body.tax-product_cat {
 	overflow: hidden;
 }
 
-.bt_bb_single_product_title a {
-	height: 41px;
+@media screen and (max-width: 574px) {
+	.bt_bb_single_product_title a,
+	.bt_bb_size_extrasmall.bt_bb_headline h2 a {
+		height: 41px;
+	}
 }
 
 .bt_bb_single_product_title a,
