@@ -162,20 +162,38 @@ $thc_val = $thcpercentage && isset($thcpercentage[0]) && is_object($thcpercentag
 
 	<?php
 	// Products with this strain
+	global $wp_query;
+	
 	if (have_posts()):
+		// Setup WooCommerce loop properties for pagination
+		wc_setup_loop(array(
+			'columns'      => wc_get_default_products_per_row(),
+			'name'         => 'strain-products',
+			'is_shortcode' => false,
+			'is_search'    => false,
+			'is_paginated' => true,
+			'total'        => $wp_query->found_posts,
+			'total_pages'  => $wp_query->max_num_pages,
+			'per_page'     => $wp_query->get('posts_per_page'),
+			'current_page' => max(1, get_query_var('paged') ? get_query_var('paged') : 1),
+		));
 		?>
 		<div class="strain-products">
-				<h2 class="strain-products__title"><?= esc_html($strain->name) ?> Products</h2>
-				<ul class="strain-products__grid">
-					<?php
-					while (have_posts()): the_post();
-						wc_get_template_part('content', 'product');
-					endwhile;
-					?>
-				</ul>
-				<?php woocommerce_pagination(); ?>
+			<h2 class="strain-products__title"><?= esc_html($strain->name) ?> Products</h2>
+			<?php
+			woocommerce_product_loop_start();
+			
+			while (have_posts()): the_post();
+				wc_get_template_part('content', 'product');
+			endwhile;
+			
+			woocommerce_product_loop_end();
+			?>
+			<?php woocommerce_pagination(); ?>
 		</div>
-	<?php endif; ?>
+		<?php
+		wc_reset_loop();
+	endif; ?>
     </div>
 </main>
 
