@@ -1187,6 +1187,11 @@ function strain_disable_sidebar($is_active_sidebar, $index) {
 
 add_filter('xmlrpc_enabled', '__return_false');
 
+// Related products - 4 columns
+add_filter('woocommerce_related_products_columns', function($columns) {
+	return 4;
+});
+
 // Shortcode для вывода списка strains
 function strains_list_shortcode($atts) {
     $atts = shortcode_atts(array(

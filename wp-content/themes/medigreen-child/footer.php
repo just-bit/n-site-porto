@@ -2,10 +2,10 @@
 <?php
 
 if ( BoldThemesFramework::$has_sidebar ) {
-	include( get_parent_theme_file_path( 'sidebar.php' ) );					
+	include( get_theme_file_path( 'sidebar.php' ) );
 }
 
-?> 
+?>
 	</div><!-- /contentHolder -->
 </div><!-- /contentWrap -->
 
@@ -39,7 +39,7 @@ $custom_text_html = '';
 $custom_text = boldthemes_get_option( 'custom_text' );
 if ( $custom_text != '' ) {
 	$custom_text_html = '<p class="copyLine">' . $custom_text . '</p>';
-} 
+}
 
 if ( boldthemes_get_option( 'footer_dark_skin' ) ) {
 	echo '<footer class="btDarkSkin">';

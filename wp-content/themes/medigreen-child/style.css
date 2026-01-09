@@ -1329,6 +1329,7 @@ td.actions p {
 
 /* catalog */
 
+/*
 body.post-type-archive-product,
 body.tax-product {
 	section:has(h1) {
@@ -1377,6 +1378,7 @@ body.tax-product {
 		}
 	}
 }
+*/
 
 
 .btSidebarLeft.btWithSidebar .btContentHolder .btSidebar {
